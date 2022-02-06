@@ -21,7 +21,7 @@ In the application's `resources` folder, create a Cayenne project file:
     >
         <map-ref name="datamap"/>
         <data-source>
-            <driver value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <driver value="org.apache.derby.iapi.jdbc.AutoloadedDriver"/>
             <url value="jdbc:derby:memory:testdb;create=true"/>
             <connectionPool min="1" max="1"/>
             <login/>
@@ -107,14 +107,13 @@ Create an application and a resource class in package `org.example.agrest`:
 [source, Java]
 ----
 @ApplicationPath("/api/*")
-public class BookstoreApplication extends ResourceConfig {
+public class Application extends ResourceConfig {
 
-    public BookstoreApplication() {
+    public Application() {
 
-        ServerRuntime cayenneRuntime
-                = ServerRuntime.builder()
-                               .addConfig("cayenne-project.xml")
-                               .build();
+        ServerRuntime cayenneRuntime = ServerRuntime.builder()
+            .addConfig("cayenne-project.xml")
+            .build();
 
         AgRuntime agRuntime = AgBuilder.build(cayenneRuntime);
         super.register(agRuntime);
@@ -159,16 +158,16 @@ Provide a servlet configuration and a mapping based on the application class tha
          version="3.1">
 
     <servlet>
-        <servlet-name>BookstoreApp</servlet-name>
+        <servlet-name>api</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>org.example.agrest.BookstoreApplication</param-value>
+            <param-value>org.example.agrest.Application</param-value>
         </init-param>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>BookstoreApp</servlet-name>
+        <servlet-name>api</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 

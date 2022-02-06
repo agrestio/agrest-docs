@@ -2,4 +2,12 @@
 
 = Agrest Workflow
 
-include::_agrest-workflow/create_simple_app.adoc[]
+== Create a Simple `Agrest` App
+
+include::_agrest-workflow/setup.adoc[]
+
+include::_agrest-workflow/starting_project.adoc[]
+
+include::_agrest-workflow/implementation.adoc[]
+
+include::_agrest-workflow/running_app.adoc[]
