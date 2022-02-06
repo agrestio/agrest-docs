@@ -1,0 +1,5 @@
+:agrest-header: _agrest-workflow/header.html
+
+= Agrest Workflow
+
+include::_agrest-workflow/create_simple_app.adoc[]
