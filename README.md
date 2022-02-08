@@ -1,2 +1,7 @@
-Documentation for [Agrest](https://agrest.io). To publish your changes, commit them to the `main` branch, 
-and rebuilt the site per instructions under the [agrest-io project](https://github.com/agrestio/agrest-io).
+Agrest Documentation
+====================
+
+This branch contains documentation for [Agrest](https://agrest.io) **v4.x**. 
+
+To publish your changes, commit them, and rebuilt the site 
+per instructions under the [agrest-io project](https://github.com/agrestio/agrest-io).
