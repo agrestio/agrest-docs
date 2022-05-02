@@ -2,9 +2,6 @@
 
 = Agrest Overview
 
-// base path to java code include
-:agrest-root: {basedir}/../../..
-
 include::_chapters/what-is-agrest.adoc[]
 
 include::_chapters/what-agrest-is-not.adoc[]
