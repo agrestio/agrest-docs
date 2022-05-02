@@ -2,7 +2,7 @@
 
 = Agrest Framework
 
-include::_chapters/prerequisites.adoc[]
+include::_chapters/_01_overview.adoc[]
 
 include::_chapters/getting-started.adoc[]
 
