@@ -1,7 +1,7 @@
 === Response: Simple Document
 
 This document is used in responses that contain no data, just a boolean status and a
-message. On success it might look like this:
+message. On success, it might look like this:
 
 [source, JSON]
 ----
@@ -15,7 +15,7 @@ Content-Type: application/json
 ----
 
 
-On failure it might look like this:
+On failure, it might look like this:
 
 [source, JSON]
 ----
