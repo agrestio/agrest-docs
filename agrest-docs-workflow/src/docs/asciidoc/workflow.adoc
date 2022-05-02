@@ -1,13 +1,13 @@
-:agrest-header: _agrest-workflow/header.html
+:agrest-header: _chapters/header.html
 
 = Agrest Workflow
 
 == Create a Simple `Agrest` App
 
-include::_agrest-workflow/setup.adoc[]
+include::_chapters/setup.adoc[]
 
-include::_agrest-workflow/starting_project.adoc[]
+include::_chapters/starting_project.adoc[]
 
-include::_agrest-workflow/implementation.adoc[]
+include::_chapters/implementation.adoc[]
 
-include::_agrest-workflow/running_app.adoc[]
+include::_chapters/running_app.adoc[]
