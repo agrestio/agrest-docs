@@ -26,6 +26,8 @@
         <asciidoctorj.pdf.version>1.6.2</asciidoctorj.pdf.version>
         <jruby.version>9.2.20.1</jruby.version>
         <jsoup.version>1.14.3</jsoup.version>
+
+        <agrest.version>5.0-SNAPSHOT</agrest.version>
     </properties>
 
     <repositories>
@@ -53,6 +55,13 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.agrest</groupId>
+                <artifactId>agrest-bom</artifactId>
+                <version>${agrest.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
             </dependency>
         </dependencies>
     </dependencyManagement>
