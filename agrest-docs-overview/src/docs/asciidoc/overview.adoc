@@ -1,4 +1,4 @@
-:agrest-header: _chapters_/header.html
+:agrest-header: _chapters/header.html
 
 = Agrest Overview
 
