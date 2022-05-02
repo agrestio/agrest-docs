@@ -4,7 +4,7 @@
 
 	<groupId>io.agrest.docs</groupId>
 	<artifactId>agrest-docs</artifactId>
-    <version>4.9</version>
+    <version>5.0</version>
 	<name>agrest-docs: Agrest.io AsciiDoc documentation</name>
 	<packaging>pom</packaging>
 
