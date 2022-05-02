@@ -23,8 +23,71 @@ public DataResponse<Domain> getOne(@PathParam("id") int id, @Context UriInfo uri
 }
 ----
 
-include::_customizing-request-processing/stage.adoc[]
+=== stage
 
-include::_customizing-request-processing/terminalStage.adoc[]
+Just add `stage` method to the chain and put two parameters:
 
-include::_customizing-request-processing/routingStage.adoc[]
+* Name of stage after which your custom processing apply.
+* Lambda expression that implements the processing.
+
+The implementation can use provided `SelectContext` for inspecting and modifying.
+Please, pay attention that the context may have different state for different stages.
+
+[source, Java]
+----
+...
+
+@Context
+private Configuration config;
+
+@GET
+@Path("{id}")
+public DataResponse<Domain> getOne(@PathParam("id") int id, @Context UriInfo uriInfo) {
+    return Ag.select(Domain.class, config)
+             .byId(id)
+             .uri(uriInfo)
+             .stage(SelectStage.PARSE_REQUEST, (SelectContext<Domain> c) -> {
+                // TODO: Add a customization with regards of the parse request stage
+             })
+             .getOne();
+}
+----
+
+Agrest supports the following stage types:
+
+[width="50%"]
+|===
+.6+|SelectStage |START
+|PARSE_REQUEST
+|CREATE_ENTITY
+|APPLY_SERVER_PARAMS
+|ASSEMBLE_QUERY
+|FETCH_DATA
+.6+|UpdateStage |START
+|PARSE_REQUEST
+|CREATE_ENTITY
+|APPLY_SERVER_PARAMS
+|UPDATE_DATA_STORE
+|FILL_RESPONSE
+.2+|DeleteStage |START
+|DELETE_IN_DATA_STORE
+|===
+
+Apart of the `stage` method Agrest provides additional two `terminalStage` and `routingStage` methods.
+These two could be customised in the same way.
+
+Please, pay attention that these stage operations are composable. For each stage all custom processors will be invoked in the order they were registered.
+
+=== terminalStage
+
+Registers a consumer to be executed after the specified standard execution stage.
+The rest of the standard pipeline following the named stage will be skipped.
+This is useful for quick assembly of custom back-ends that reuse the initial stages of Agrest processing,
+but query the data store on their own. The consumer can inspect and modify provided context `SelectContext` or `UpdateContext`.
+
+=== routingStage
+
+Registers a processor to be executed after the specified standard execution stage.
+The processor can inspect and modify provided context `SelectContext` or `UpdateContext`.
+When finished, processor can either pass control to the next stage by returning
+`ProcessorOutcome.CONTINUE`, or terminate the pipeline by returning `ProcessorOutcome.STOP`.
