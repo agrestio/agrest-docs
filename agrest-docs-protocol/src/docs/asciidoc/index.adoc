@@ -1,4 +1,4 @@
-:agrest-header: _protocol/header.html
+:agrest-header: _chapters/header.html
 
 = Agrest Protocol
 
