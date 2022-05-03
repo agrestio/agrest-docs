@@ -9,11 +9,11 @@
 	<packaging>pom</packaging>
 
     <modules>
+        <module>agrest-asciidoc-postprocessor</module>
+        <module>agrest-docs-gettingstarted</module>
         <module>agrest-docs-overview</module>
         <module>agrest-docs-protocol</module>
         <module>agrest-docs-framework</module>
-        <module>agrest-docs-workflow</module>
-        <module>agrest-asciidoc-postprocessor</module>
     </modules>
 
     <properties>

@@ -7,10 +7,10 @@
         <version>5.0</version>
     </parent>
 
-    <artifactId>agrest-docs-workflow</artifactId>
+    <artifactId>agrest-docs-gettingstarted</artifactId>
 
     <packaging>jar</packaging>
-    <name>agrest-docs-workflow: workflow docs</name>
+    <name>agrest-docs-gettingstarted: tutorial</name>
 
     <build>
         <plugins>
