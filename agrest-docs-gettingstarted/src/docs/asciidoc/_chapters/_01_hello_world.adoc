@@ -1,0 +1,6 @@
+== Hello World in Agrest
+
+
+
+You will need Java 17 (though this can be ported to Java 11 as well) and Apache Maven
+
