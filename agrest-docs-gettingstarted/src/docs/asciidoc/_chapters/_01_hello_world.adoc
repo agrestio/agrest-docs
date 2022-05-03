@@ -1,6 +1,27 @@
 == Hello World in Agrest
 
+Let’s start with a new Java Maven project created in your favorite IDE. Your `pom.xml`, in addition
+to the required project tags, will need to declare a BOM ("Bill of Material") import for Agrest in the
+`<dependencyManagement/>` section:
 
+[source,xml,indent=0]
+----
+include::../../../../pom.xml[tag=bom]
+----
+This will allow the `<dependencies/>` section that follows to include various Agrest modules and not
+worry about their individual versions. So let’s create `<dependencies>..</depdendencies>` tags and
+import a few modules:
 
-You will need Java 17 (though this can be ported to Java 11 as well) and Apache Maven
+[source,xml,indent=0]
+----
+include::../../../../pom.xml[tag=agrest-dependencies]
+----
+
+In addition to Agrest, let's add the dependencies on Jersey and Derby:
+
+[source,xml,indent=0]
+----
+include::../../../../pom.xml[tag=other-dependencies]
+----
+
 

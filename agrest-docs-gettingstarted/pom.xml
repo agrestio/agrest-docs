@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>agrest-docs</artifactId>
@@ -11,6 +12,36 @@
 
     <packaging>jar</packaging>
     <name>agrest-docs-gettingstarted: tutorial</name>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- tag::bom[] -->
+            <dependency>
+                <groupId>io.agrest</groupId>
+                <artifactId>agrest-bom</artifactId>
+                <!-- Should be a specific 5.x version -->
+                <version>${agrest.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <!-- end::bom[] -->
+        </dependencies>
+    </dependencyManagement>
+
+
+    <dependencies>
+        <!-- tag::agrest-dependencies[] -->
+        <dependency>
+            <groupId>io.agrest</groupId>
+            <artifactId>agrest-jaxrs3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.agrest</groupId>
+            <artifactId>agrest-cayenne</artifactId>
+        </dependency>
+        <!-- end::agrest-dependencies[] -->
+    </dependencies>
 
     <build>
         <plugins>

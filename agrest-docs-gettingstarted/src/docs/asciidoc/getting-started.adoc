@@ -4,14 +4,16 @@
 
 This tutorial walks you through creation of a simple Agrest application.
 With Agrest, there are some choices to be made for the REST engine and
-(to an extent) backends. For the tutorial we will use the following:
+(to an extent) backends. Usually they are based on user preferences,
+organization standards and/or application requirements. For the tutorial
+we will use the following:
 
 * JAX-RS 3 (Jakarta)
 * Jersey 3 REST framework
 * Java HTTP Server (can be replaced with SpringBoot, Jetty, etc.)
-* Apache Cayenne ORM backend
+* Derby database with Apache Cayenne ORM backend
 
-To build the project we'll be using Maven (can be done in Gradle too of course) and
+To build the project we'll be using Maven (you can use Gradle if you'd like) and
 Java 17 (should also work on Java 11).
 
 include::_chapters/_01_hello_world.adoc[]
