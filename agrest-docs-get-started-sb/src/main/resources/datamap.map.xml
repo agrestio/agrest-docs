@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-map xmlns="http://cayenne.apache.org/schema/10/modelMap"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:schemaLocation="http://cayenne.apache.org/schema/10/modelMap https://cayenne.apache.org/schema/10/modelMap.xsd"
+	 project-version="10">
+	<property name="defaultPackage" value="io.agrest.tutorial.sb.persistence"/>
+	<property name="quoteSqlIdentifiers" value="true"/>
+	<db-entity name="author">
+		<db-attribute name="id" type="BIGINT" isPrimaryKey="true" isMandatory="true"/>
+		<db-attribute name="name" type="VARCHAR" isMandatory="true" length="200"/>
+	</db-entity>
+	<db-entity name="book">
+		<db-attribute name="author_id" type="BIGINT" isMandatory="true"/>
+		<db-attribute name="id" type="BIGINT" isPrimaryKey="true" isMandatory="true"/>
+		<db-attribute name="title" type="VARCHAR" isMandatory="true" length="200"/>
+	</db-entity>
+	<obj-entity name="Author" className="io.agrest.tutorial.sb.persistence.Author" dbEntityName="author">
+		<obj-attribute name="name" type="java.lang.String" db-attribute-path="name"/>
+	</obj-entity>
+	<obj-entity name="Book" className="io.agrest.tutorial.sb.persistence.Book" dbEntityName="book">
+		<obj-attribute name="title" type="java.lang.String" db-attribute-path="title"/>
+	</obj-entity>
+	<db-relationship name="books" source="author" target="book" toMany="true">
+		<db-attribute-pair source="id" target="author_id"/>
+	</db-relationship>
+	<db-relationship name="author" source="book" target="author">
+		<db-attribute-pair source="author_id" target="id"/>
+	</db-relationship>
+	<obj-relationship name="books" source="Author" target="Book" deleteRule="Deny" db-relationship-path="books"/>
+	<obj-relationship name="author" source="Book" target="Author" deleteRule="Nullify" db-relationship-path="author"/>
+	<cgen xmlns="http://cayenne.apache.org/schema/10/cgen">
+		<destDir>../java</destDir>
+		<mode>entity</mode>
+		<template>templates/v4_1/subclass.vm</template>
+		<superTemplate>templates/v4_1/superclass.vm</superTemplate>
+		<template>templates/v4_1/subclass.vm</template>
+		<superTemplate>templates/v4_1/superclass.vm</superTemplate>
+		<embeddableTemplate>templates/v4_1/embeddable-subclass.vm</embeddableTemplate>
+		<embeddableSuperTemplate>templates/v4_1/embeddable-superclass.vm</embeddableSuperTemplate>
+		<queryTemplate>templates/v4_1/datamap-subclass.vm</queryTemplate>
+		<querySuperTemplate>templates/v4_1/datamap-superclass.vm</querySuperTemplate>
+		<outputPattern>*.java</outputPattern>
+		<makePairs>true</makePairs>
+		<usePkgPath>true</usePkgPath>
+		<overwrite>false</overwrite>
+		<createPropertyNames>false</createPropertyNames>
+		<createPKProperties>false</createPKProperties>
+		<client>false</client>
+	</cgen>
+</data-map>

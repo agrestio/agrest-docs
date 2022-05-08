@@ -14,7 +14,8 @@
 
     <properties>
         <spring.boot.version>2.6.7</spring.boot.version>
-        <derby.version>10.15.2.0</derby.version>
+        <spring.version>5.3.19</spring.version>
+        <derby.version>10.14.2.0</derby.version>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +35,12 @@
                 <artifactId>spring-boot-starter-jersey</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+            <!-- TODO: this import is a hack until https://github.com/spring-projects/spring-boot/issues/30896 is resolved -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.derby</groupId>
                 <artifactId>derby</artifactId>
@@ -48,6 +55,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+        <!-- TODO: this import is a hack until https://github.com/spring-projects/spring-boot/issues/30896 is resolved -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
             <groupId>io.agrest</groupId>

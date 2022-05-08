@@ -7,10 +7,20 @@ import io.agrest.runtime.AgRuntime;
 import io.agrest.tutorial.sb.api.BookApi;
 import org.apache.cayenne.configuration.server.ServerRuntime;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
+@SpringBootApplication
 @Component
 public class AgrestApp extends ResourceConfig {
+
+    public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(AgrestApp.class);
+        application.setBannerMode(Banner.Mode.OFF);
+        application.run(args);
+    }
 
     public AgrestApp() {
 

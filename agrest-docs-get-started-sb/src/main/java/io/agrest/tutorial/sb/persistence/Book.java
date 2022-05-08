@@ -1,4 +1,6 @@
 package io.agrest.tutorial.sb.persistence;
 
-public class Book {
+import io.agrest.tutorial.sb.persistence.auto._Book;
+
+public class Book extends _Book {
 }
