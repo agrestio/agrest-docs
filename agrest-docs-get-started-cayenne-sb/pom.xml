@@ -50,8 +50,8 @@
             <version>10.14.2.0</version>
         </dependency>
 
-        <!-- TODO: this import is a hack until
-            https://github.com/spring-projects/spring-boot/issues/30896 is resolved
+        <!-- TODO: this import is a hack until this issue is resolved:
+            https://github.com/spring-projects/spring-boot/issues/30896
        -->
         <dependency>
             <groupId>org.springframework</groupId>
