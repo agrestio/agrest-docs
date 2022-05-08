@@ -8,9 +8,9 @@
         <version>5.0</version>
     </parent>
 
-    <artifactId>agrest-docs-get-started-sb</artifactId>
+    <artifactId>agrest-docs-get-started-cayenne-sb</artifactId>
     <packaging>jar</packaging>
-    <name>agrest-docs-get-started-sb: Agrest SpringBoot Tutorial</name>
+    <name>agrest-docs-get-started-cayenne-sb: Agrest SpringBoot Tutorial</name>
 
     <properties>
         <spring.boot.version>2.6.7</spring.boot.version>

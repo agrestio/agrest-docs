@@ -10,7 +10,7 @@
 
     <modules>
         <module>agrest-asciidoc-postprocessor</module>
-        <module>agrest-docs-get-started-sb</module>
+        <module>agrest-docs-get-started-cayenne-sb</module>
         <module>agrest-docs-overview</module>
         <module>agrest-docs-protocol</module>
         <module>agrest-docs-framework</module>
