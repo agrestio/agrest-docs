@@ -15,3 +15,4 @@ worry about their individual versions. Now let's set up the `<dependencies/>` se
 include::../../../../pom.xml[tag=agrest-dependencies]
 ----
 The first two dependencies are Agrest-related, others are SpringBoot and Derby.
+
