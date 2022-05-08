@@ -4,6 +4,7 @@ import io.agrest.cayenne.AgCayenneBuilder;
 import io.agrest.cayenne.AgCayenneModule;
 import io.agrest.jaxrs2.AgJaxrsFeature;
 import io.agrest.runtime.AgRuntime;
+import io.agrest.tutorial.sb.api.AuthorApi;
 import io.agrest.tutorial.sb.api.BookApi;
 import org.apache.cayenne.configuration.server.ServerRuntime;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -36,6 +37,7 @@ public class AgrestApp extends ResourceConfig {
         register(agFeature);
 
         // Register API endpoints
+        register(AuthorApi.class);
         register(BookApi.class);
     }
 }

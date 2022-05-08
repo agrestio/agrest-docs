@@ -6,12 +6,12 @@
 	<property name="defaultPackage" value="io.agrest.tutorial.sb.persistence"/>
 	<property name="quoteSqlIdentifiers" value="true"/>
 	<db-entity name="author">
-		<db-attribute name="id" type="BIGINT" isPrimaryKey="true" isMandatory="true"/>
+		<db-attribute name="id" type="BIGINT" isPrimaryKey="true" isGenerated="true" isMandatory="true"/>
 		<db-attribute name="name" type="VARCHAR" isMandatory="true" length="200"/>
 	</db-entity>
 	<db-entity name="book">
 		<db-attribute name="author_id" type="BIGINT" isMandatory="true"/>
-		<db-attribute name="id" type="BIGINT" isPrimaryKey="true" isMandatory="true"/>
+		<db-attribute name="id" type="BIGINT" isPrimaryKey="true" isGenerated="true" isMandatory="true"/>
 		<db-attribute name="title" type="VARCHAR" isMandatory="true" length="200"/>
 	</db-entity>
 	<obj-entity name="Author" className="io.agrest.tutorial.sb.persistence.Author" dbEntityName="author">
