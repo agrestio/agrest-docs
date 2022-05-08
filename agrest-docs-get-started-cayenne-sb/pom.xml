@@ -12,15 +12,9 @@
     <packaging>jar</packaging>
     <name>agrest-docs-get-started-cayenne-sb: Agrest SpringBoot Tutorial</name>
 
-    <properties>
-        <spring.boot.version>2.6.7</spring.boot.version>
-        <spring.version>5.3.19</spring.version>
-        <derby.version>10.14.2.0</derby.version>
-    </properties>
-
+    <!-- tag::bom[] -->
     <dependencyManagement>
         <dependencies>
-            <!-- tag::bom[] -->
             <dependency>
                 <groupId>io.agrest</groupId>
                 <artifactId>agrest-bom</artifactId>
@@ -29,38 +23,13 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            <!-- end::bom[] -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jersey</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-            <!-- TODO: this import is a hack until https://github.com/spring-projects/spring-boot/issues/30896 is resolved -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.derby</groupId>
-                <artifactId>derby</artifactId>
-                <version>${derby.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
+    <!-- end::bom[] -->
 
 
+    <!-- tag::agrest-dependencies[] -->
     <dependencies>
-        <!-- tag::agrest-dependencies[] -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jersey</artifactId>
-        </dependency>
-        <!-- TODO: this import is a hack until https://github.com/spring-projects/spring-boot/issues/30896 is resolved -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.agrest</groupId>
             <artifactId>agrest-jaxrs2</artifactId>
@@ -69,12 +38,28 @@
             <groupId>io.agrest</groupId>
             <artifactId>agrest-cayenne</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+            <version>2.6.7</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
+            <version>10.14.2.0</version>
         </dependency>
-        <!-- end::agrest-dependencies[] -->
+
+        <!-- TODO: this import is a hack until
+            https://github.com/spring-projects/spring-boot/issues/30896 is resolved
+       -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.19</version>
+        </dependency>
     </dependencies>
+    <!-- end::agrest-dependencies[] -->
 
     <build>
         <plugins>
