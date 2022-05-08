@@ -8,11 +8,14 @@
         <version>5.0</version>
     </parent>
 
-    <artifactId>agrest-docs-gettingstarted</artifactId>
-
+    <artifactId>agrest-docs-get-started-sb</artifactId>
     <packaging>jar</packaging>
-    <name>agrest-docs-gettingstarted: tutorial</name>
+    <name>agrest-docs-get-started-sb: Agrest SpringBoot Tutorial</name>
 
+    <properties>
+        <spring.boot.version>2.6.7</spring.boot.version>
+        <derby.version>10.15.2.0</derby.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -26,6 +29,16 @@
                 <type>pom</type>
             </dependency>
             <!-- end::bom[] -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jersey</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+                <version>${derby.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -33,12 +46,20 @@
     <dependencies>
         <!-- tag::agrest-dependencies[] -->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.agrest</groupId>
-            <artifactId>agrest-jaxrs3</artifactId>
+            <artifactId>agrest-jaxrs2</artifactId>
         </dependency>
         <dependency>
             <groupId>io.agrest</groupId>
             <artifactId>agrest-cayenne</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
         </dependency>
         <!-- end::agrest-dependencies[] -->
     </dependencies>
