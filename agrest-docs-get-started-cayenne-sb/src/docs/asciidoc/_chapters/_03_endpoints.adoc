@@ -1,0 +1,8 @@
+
+
+[source,bash]
+----
+curl -X POST -d '{"name":"Ernest Hemingway"}' \
+  -H 'Content-Type: application/json' \
+  -i 'http://localhost:8080/author'
+----

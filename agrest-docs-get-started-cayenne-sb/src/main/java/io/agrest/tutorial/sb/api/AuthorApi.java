@@ -1,6 +1,6 @@
 package io.agrest.tutorial.sb.api;
 
-import io.agrest.SimpleResponse;
+import io.agrest.DataResponse;
 import io.agrest.jaxrs2.AgJaxrs;
 import io.agrest.tutorial.sb.persistence.Author;
 
@@ -21,7 +21,7 @@ public class AuthorApi {
     private Configuration config;
 
     @POST
-    public SimpleResponse create(String data) {
-        return AgJaxrs.create(Author.class, config).sync(data);
+    public DataResponse<Author> create(String data) {
+        return AgJaxrs.create(Author.class, config).syncAndSelect(data);
     }
 }

@@ -8,7 +8,9 @@ and different backends. This tutorial will be done with the following components
 * SpringBoot / JAX-RS 2 (via `spring-boot-starter-jersey`)
 * Derby database with Apache Cayenne ORM backend
 
-To build the project we'll be using Maven and Java 17. Here you also have some choices - Agrest would work fine with
-Gradle and supports Java versions 11 and higher.
+To build the project we'll be using Maven and Java 17. But keep in mind that Agrest would work fine with Gradle and
+supports Java versions 11 and higher.
 
-include::_chapters/_01_hello_world.adoc[]
+include::_chapters/_01_project_setup.adoc[]
+include::_chapters/_02_cayenne_mapping.adoc[]
+include::_chapters/_03_endpoints.adoc[]

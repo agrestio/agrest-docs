@@ -1,4 +1,6 @@
-== Hello World in Agrest
+== Book Store in Agrest
+
+Through this tutorial we will build a simple Bookstore REST application with a real database.
 
 Let’s start with a new Java Maven project created in your favorite IDE. Your `pom.xml`, in addition
 to the required project tags, will need to declare a BOM ("Bill of Material") import for Agrest in the
@@ -9,7 +11,7 @@ to the required project tags, will need to declare a BOM ("Bill of Material") im
 include::../../../../pom.xml[tag=bom]
 ----
 This will allow the `<dependencies/>` section that follows to include various Agrest modules and not
-worry about their individual versions. So let’s create `<dependencies>..</depdendencies>` tags and
+worry about their individual versions. So let’s create `<dependencies>..</dependencies>` tags and
 import a few modules:
 
 [source,xml,indent=0]
