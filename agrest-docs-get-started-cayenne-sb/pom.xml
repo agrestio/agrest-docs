@@ -15,7 +15,7 @@
     <!-- tag::bom[] -->
     <dependencyManagement>
         <dependencies>
-            <!-- Controls versions of SpringBoot and its dependencies -->
+            <!-- Controls versions of Spring Boot and its dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
