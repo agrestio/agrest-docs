@@ -40,13 +40,13 @@
     <!-- tag::agrest-dependencies[] -->
     <dependencies>
 
-        <!-- This adds support for JAX-RS / Jersey 2  -->
+        <!-- This adds Agrest integration for JAX-RS / Jersey 2  -->
         <dependency>
             <groupId>io.agrest</groupId>
             <artifactId>agrest-jaxrs2</artifactId>
         </dependency>
 
-        <!-- This adds a DB backend based on Cayenne ORM -->
+        <!-- This adds an Agrest DB backend based on Cayenne ORM -->
         <dependency>
             <groupId>io.agrest</groupId>
             <artifactId>agrest-cayenne</artifactId>
