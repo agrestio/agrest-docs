@@ -1,7 +1,7 @@
 == Setting up the Project
 
 Let’s start with a new Java Maven project created in your favorite IDE. Once you have a POM file, let's add a
-`<dependencyManagement/>` section with Agrest "BOM" ("Bill of Materials"):
+`<dependencyManagement/>` section with "BOM" ("Bill of Materials") declarations for Spring Boot and Agrest:
 
 [source,xml,indent=0]
 ----

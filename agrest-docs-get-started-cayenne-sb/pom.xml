@@ -15,6 +15,16 @@
     <!-- tag::bom[] -->
     <dependencyManagement>
         <dependencies>
+            <!-- Controls versions of SpringBoot and its dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.6.7</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Controls versions of Agrest modules -->
             <dependency>
                 <groupId>io.agrest</groupId>
                 <artifactId>agrest-bom</artifactId>
@@ -27,13 +37,16 @@
     </dependencyManagement>
     <!-- end::bom[] -->
 
-
     <!-- tag::agrest-dependencies[] -->
     <dependencies>
+
+        <!-- This adds support for JAX-RS / Jersey 2  -->
         <dependency>
             <groupId>io.agrest</groupId>
             <artifactId>agrest-jaxrs2</artifactId>
         </dependency>
+
+        <!-- This adds a DB backend based on Cayenne ORM -->
         <dependency>
             <groupId>io.agrest</groupId>
             <artifactId>agrest-cayenne</artifactId>
@@ -42,21 +55,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jersey</artifactId>
-            <version>2.6.7</version>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
             <version>10.14.2.0</version>
-        </dependency>
-
-        <!-- TODO: this import is a hack until this issue is resolved:
-            https://github.com/spring-projects/spring-boot/issues/30896
-       -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.3.19</version>
         </dependency>
     </dependencies>
     <!-- end::agrest-dependencies[] -->
