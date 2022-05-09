@@ -52,10 +52,13 @@
             <artifactId>agrest-cayenne</artifactId>
         </dependency>
 
+        <!-- Spring Boot + Jersey -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jersey</artifactId>
         </dependency>
+
+        <!-- Simple embedded Java DB -->
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
