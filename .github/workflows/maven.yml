@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: JDK ${{ matrix.java }}
+    name: mvn package JDK ${{ matrix.java }}
     strategy:
       matrix:
         java: [ "17" ]
