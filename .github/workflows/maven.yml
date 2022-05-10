@@ -1,0 +1,30 @@
+name: 'maven build 5.x'
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: JDK ${{ matrix.java }}
+    strategy:
+      matrix:
+        java: [ "11" ]
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup JDK ${{ matrix.java }}
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+
+      - name: mvn cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}-build-v1
+          restore-keys: ${{ runner.os }}-maven
+
+      - name: mvn package
+        run: mvn package
