@@ -1,0 +1,37 @@
+== Adding Custom Property
+
+Agrest has a powerful API for building REST entity schemas, but so far we didn't have to interact with it.
+Agrest simply took the existing model from Cayenne and exposed each ORM entity as a REST entity. In reality REST
+entities often look very different from persistent objects, and there are various mechanisms to define their structure
+and retrieval strategy. Here we will show the simplest way to define a new property in an existing entity.
+
+Let's imagine we would like to add the `age` property to the `Author` object. This is not a persistent property, and
+is not known to Cayenne. Yet, it is rather easy to calculate from the current date and the `Author.dateOfBirth`
+property. So we can write a getter method on the Author object that performs this calculation. But we also need to
+tell Agrest that this property is a part of the REST model. For this we will use `@AgAttribute` annotation:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/tutorial/sb/persistence/Author.java[tag=age]
+----
+
+Now let's restart the app, and run the following request for books with authors and their ages:
+
+[source,bash]
+----
+curl 'http://localhost:8080/book?exclude=id&include=author.name&include=author.age'
+----
+
+[source,json]
+----
+{
+  "data":[
+    {"author":{"age":122,"name":"Ernest Hemingway"},"title":"For Whom the Bell Tolls"},
+    {"author":{"age":122,"name":"Ernest Hemingway"},"title":"A Farewell to Arms"}
+  ],
+  "total":2
+}
+----
+
+We can see that as of this writing, Hemingway was 122 years old. Again, `@AgAttribute` on getters is not the only
+way to add custom properties, bit it is very handy for simple properties like our example.

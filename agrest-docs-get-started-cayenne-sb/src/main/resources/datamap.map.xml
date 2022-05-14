@@ -6,6 +6,7 @@
 	<property name="defaultPackage" value="io.agrest.tutorial.sb.persistence"/>
 	<property name="quoteSqlIdentifiers" value="true"/>
 	<db-entity name="author">
+		<db-attribute name="date_of_birth" type="DATE" isMandatory="true"/>
 		<db-attribute name="id" type="BIGINT" isPrimaryKey="true" isGenerated="true" isMandatory="true"/>
 		<db-attribute name="name" type="VARCHAR" isMandatory="true" length="200"/>
 	</db-entity>
@@ -15,6 +16,7 @@
 		<db-attribute name="title" type="VARCHAR" isMandatory="true" length="200"/>
 	</db-entity>
 	<obj-entity name="Author" className="io.agrest.tutorial.sb.persistence.Author" dbEntityName="author">
+		<obj-attribute name="dateOfBirth" type="java.time.LocalDate" db-attribute-path="date_of_birth"/>
 		<obj-attribute name="name" type="java.lang.String" db-attribute-path="name"/>
 	</obj-entity>
 	<obj-entity name="Book" className="io.agrest.tutorial.sb.persistence.Book" dbEntityName="book">

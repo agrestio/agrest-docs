@@ -3,9 +3,11 @@ package io.agrest.tutorial.sb.persistence.auto;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.cayenne.BaseDataObject;
+import org.apache.cayenne.exp.property.DateProperty;
 import org.apache.cayenne.exp.property.ListProperty;
 import org.apache.cayenne.exp.property.PropertyFactory;
 import org.apache.cayenne.exp.property.StringProperty;
@@ -24,12 +26,24 @@ public abstract class _Author extends BaseDataObject {
 
     public static final String ID_PK_COLUMN = "id";
 
+    public static final DateProperty<LocalDate> DATE_OF_BIRTH = PropertyFactory.createDate("dateOfBirth", LocalDate.class);
     public static final StringProperty<String> NAME = PropertyFactory.createString("name", String.class);
     public static final ListProperty<Book> BOOKS = PropertyFactory.createList("books", Book.class);
 
+    protected LocalDate dateOfBirth;
     protected String name;
 
     protected Object books;
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        beforePropertyWrite("dateOfBirth", this.dateOfBirth, dateOfBirth);
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public LocalDate getDateOfBirth() {
+        beforePropertyRead("dateOfBirth");
+        return this.dateOfBirth;
+    }
 
     public void setName(String name) {
         beforePropertyWrite("name", this.name, name);
@@ -61,6 +75,8 @@ public abstract class _Author extends BaseDataObject {
         }
 
         switch(propName) {
+            case "dateOfBirth":
+                return this.dateOfBirth;
             case "name":
                 return this.name;
             case "books":
@@ -77,6 +93,9 @@ public abstract class _Author extends BaseDataObject {
         }
 
         switch (propName) {
+            case "dateOfBirth":
+                this.dateOfBirth = (LocalDate)val;
+                break;
             case "name":
                 this.name = (String)val;
                 break;
@@ -99,6 +118,7 @@ public abstract class _Author extends BaseDataObject {
     @Override
     protected void writeState(ObjectOutputStream out) throws IOException {
         super.writeState(out);
+        out.writeObject(this.dateOfBirth);
         out.writeObject(this.name);
         out.writeObject(this.books);
     }
@@ -106,6 +126,7 @@ public abstract class _Author extends BaseDataObject {
     @Override
     protected void readState(ObjectInputStream in) throws IOException, ClassNotFoundException {
         super.readState(in);
+        this.dateOfBirth = (LocalDate)in.readObject();
         this.name = (String)in.readObject();
         this.books = in.readObject();
     }

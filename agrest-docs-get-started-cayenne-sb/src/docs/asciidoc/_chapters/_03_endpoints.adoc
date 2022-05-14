@@ -57,7 +57,7 @@ Now we can run the main class in the IDE, and use `curl` or a similar HTTP clien
 [source,bash]
 ----
 curl -X POST -i \
-  -d '{"name":"Ernest Hemingway"}' \
+  -d '{"name":"Ernest Hemingway","dateOfBirth":"1899-07-21"}' \
   -H 'Content-Type: application/json' \
   http://localhost:8080/author
 ----
@@ -72,7 +72,7 @@ Date: Sat, 14 May 2022 09:39:39 GMT
 ----
 [source,json]
 ----
-{"data":[{"id":1,"name":"Ernest Hemingway"}],"total":1}
+{"data":[{"id":1,"dateOfBirth":"1899-07-21","name":"Ernest Hemingway"}],"total":1}
 ----
 
 Now let's create a `Book`. In the following POST request, use the ID of the author from the previous call:
@@ -169,3 +169,4 @@ special methods for those: `AgJaxrs.createOrUpdate(..)`, `AgJaxrs.idempotentCrea
 that have https://en.wikipedia.org/wiki/Natural_key[natural keys] understood by the client. This is not directly
 applicable to our Book and Author entities, though with a bit of a stretch we can use `Author.name` property as
 a natural key.
+
