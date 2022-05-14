@@ -1,9 +1,8 @@
 == Control Parameters
 
-Control parameters are passed as query parameters in the request URL. They are applied to the
-<<Collection_Document,Collection Document>> on server, and allow the client to dynamically request a variety of
-representations of the response Collection. The client can decide which object properties to include, how to sort and
-filter data, etc.
+Control parameters are passed as query parameters in the request URL. Within a given request, they are applied
+by the server to a response <<Collection_Document,Collection Document>>. They allow the client to dynamically shape
+responses. The client can decide which object properties to include, how to sort and filter data, etc.
 
 These parameters are normally used in GET requests, however POST/PUT can also return a Collection Document, so many of
 the parameters are also applicable when modifying data.
