@@ -2,7 +2,7 @@
 
 JSON doesn't have datatypes for either date or time. Both are represented as strings.
 Server and client must ensure that date/time strings are in
-https://en.wikipedia.org/wiki/ISO_8601[ISO 8601 format] E.g.:
+https://en.wikipedia.org/wiki/ISO_8601[ISO 8601 format]. E.g.:
 
 [source]
 ----
