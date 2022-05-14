@@ -1,6 +1,6 @@
-=== Update Entity with `PUT`
+=== Update Entity with "PUT"
 
-To update the entity we created before <<Create Entity with `POST`>> we have to implement a `PUT` method in DomainResource class:
+To update the entity we created before <<Create Entity with "POST">> we have to implement a `PUT` method in DomainResource class:
 
 [source, Java]
 ----
@@ -16,7 +16,7 @@ public SimpleResponse update(@PathParam("id") int id, String data) {
 }
 ----
 
-This simple "update chain" is very similar to the <<Create Entity with `POST`>> and the <<Read a Single Entity with `GET`>> chains.
+This simple "update chain" is very similar to the <<Create Entity with "POST">> and the <<Read a Single Entity with "GET">> chains.
 Try to sent a request to this endpoint and get a result as expected
 
 ```
@@ -24,7 +24,7 @@ curl -i -X PUT 'http://example.org/myapp/domain/1' \
 >          -d '{"vhost":"mysite2.example.org","name":"My Site #2"}'
 ```
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json

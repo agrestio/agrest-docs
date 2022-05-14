@@ -1,4 +1,4 @@
-=== Read a Single Entity with `GET`
+=== Read a Single Entity with "GET"
 
 A common request is to locate a single instance of an entity by ID. Here is how
 this can be done with Agrest:
@@ -23,7 +23,7 @@ Calling this endpoint, we'll get an expected result:
 
 `curl -i -X GET 'http://example.org/myapp/domain/1'`
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json

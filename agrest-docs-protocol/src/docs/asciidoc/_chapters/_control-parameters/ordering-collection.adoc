@@ -1,4 +1,4 @@
-=== Ordering Collection with `sort / dir`
+=== Ordering Collection with "sort" / "dir"
 
 Example 1: Sort on a single property.
 

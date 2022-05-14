@@ -1,9 +1,9 @@
-=== Response: Collection Document
+=== Collection Document
 
-A document that passes the data from the server to the client. This is the main
+A document is used in _responses_ that return the data from the server. This is the main
 representation of data in Agrest.
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json

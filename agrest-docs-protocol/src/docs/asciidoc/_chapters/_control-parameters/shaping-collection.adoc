@@ -1,4 +1,4 @@
-=== Shaping Collection with `include / exclude`
+=== Shaping Collection with "include" / "exclude"
 
 Model entities may have "simple" properties (attributes) and properties that point to
 related entities (relationships). By default Collection Document contains entity
@@ -11,7 +11,7 @@ Example 1: Include default properties (all entity attributes) minus "vhost" attr
 
 `exclude=vhost`
 
-[source, JSON]
+[source,json]
 ----
 { "id" : 45, "name" : "Agrest Site" }
 ----
@@ -20,7 +20,7 @@ Example 2: Exclude all properties, but "id".
 
 `include=id`
 
-[source, JSON]
+[source,json]
 ----
 { "id" : 45 }
 ----
@@ -29,7 +29,7 @@ Example 3: Multiple includes, one of them points to attributes of related entity
 
 `include=id&amp;include=articles.title`
 
-[source, JSON]
+[source,json]
 ----
 {
    "id" : 45,
@@ -47,7 +47,7 @@ of related objects for each root object.
 
 `include={"path":"articles","exp":"title like '%Agrest%'","sort":"title"}&amp;include=articles.title`
 
-[source, JSON]
+[source,json]
 ----
 {
    "id" : 45,
@@ -65,7 +65,7 @@ Example 5: Related objects as a map. Here we'll map article bodies by title.
 
 `include={"path":"articles","mapBy":"title"}&amp;include=articles.body`
 
-[source, JSON]
+[source,json]
 ----
 {
    "articles" : {
@@ -79,7 +79,7 @@ Example 6: Include and Exclude parameters have ability to take an array of value
 
 `include=["id","name"]`
 
-[source, JSON]
+[source,json]
 ----
 { "id" : 45, "name" : "Agrest Site" }
 ----
@@ -88,7 +88,7 @@ Example 7: The array can contain both the simple include and the advanced includ
 
 `include=["id","articles.title",{"path":"articles","exp":"title like '%Agrest%'"}]`
 
-[source, JSON]
+[source,json]
 ----
 {
    "id" : 45,
@@ -103,7 +103,7 @@ Example 8: Attributes of a related entity can be presented as an inner array in 
 
 `include=["id","name",{"articles":["title","body"]}]`
 
-[source, JSON]
+[source,json]
 ----
 {
    "id" : 45,

@@ -1,4 +1,4 @@
-=== Create Entity with `POST`
+=== Create Entity with "POST"
 
 Now let's implement a `POST` method in DomainResource class:
 
@@ -27,7 +27,7 @@ curl -i -X POST 'http://example.org/myapp/domain' \
 >          -d '{"vhost":"mysite1.example.org","name":"My Site #1"}'
 ```
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 201 Created
 Content-Type: application/json

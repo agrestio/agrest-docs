@@ -4,7 +4,7 @@ JSON doesn't have datatypes for either date or time. Both are represented as str
 Server and client must ensure that date/time strings are in
 http://en.wikipedia.org/wiki/ISO_8601[ISO 8601 format] E.g.:
 
-[source, JSON]
+[source,json]
 ----
 2015-04-19T11:08:53Z
 2015-04-10T11:08

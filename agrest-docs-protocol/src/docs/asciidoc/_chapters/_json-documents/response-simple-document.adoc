@@ -1,9 +1,9 @@
-=== Response: Simple Document
+=== Simple Document
 
-This document is used in responses that contain no data, just a boolean status and a
-message. On success it might look like this:
+This document is used in _responses_ that contain no data, just a boolean status and a
+message. On success, it might look like this:
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -15,9 +15,9 @@ Content-Type: application/json
 ----
 
 
-On failure it might look like this:
+On failure, it might look like this:
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 500 Server error
 Content-Type: application/json

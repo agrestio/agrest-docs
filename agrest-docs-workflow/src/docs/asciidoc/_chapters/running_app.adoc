@@ -26,7 +26,7 @@ curl -i -X GET 'http://localhost:8080/api/category'
 
 And get the following response:
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Date: Wed, 03 Oct 2018 10:14:51 GMT
@@ -51,7 +51,7 @@ curl -i -X POST 'http://localhost:8080/api/category' -d '{"id":"2","name":"Horro
 
 The response will be:
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 201 Created
 Date: Wed, 03 Oct 2018 10:42:17 GMT
@@ -64,7 +64,7 @@ Server: Jetty(9.3.14.v20161028)
 
 Now make the 'GET' request again and you will receive the following:
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Date: Wed, 03 Oct 2018 10:44:44 GMT

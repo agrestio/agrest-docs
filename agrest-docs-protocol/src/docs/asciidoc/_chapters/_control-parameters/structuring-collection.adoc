@@ -1,9 +1,9 @@
-=== Structuring Collection with `mapBy`
+=== Structuring Collection with "mapBy"
 
 Agrest presents the response as an array of entities <<Response: Collection Document>>.
 E.g. Request of articles returns the following array:
 
-[source, JSON]
+[source,json]
 ----
 {
 "data" : [
@@ -19,7 +19,7 @@ Using `mapBy` this array can be transformed to a map. One of entity fields is us
 
 `mapBy=publishedOn`
 
-[source, JSON]
+[source,json]
 ----
 {
 "data" : {

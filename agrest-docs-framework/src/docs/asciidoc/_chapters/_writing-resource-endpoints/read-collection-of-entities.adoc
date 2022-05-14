@@ -1,4 +1,4 @@
-=== Read Collection of Entities with `GET`
+=== Read Collection of Entities with "GET"
 
 You may create more Domain objects, executing `POST` request above. Now
 let's write a `GET` method to search for domains:
@@ -22,7 +22,7 @@ client like this:
 
 `curl -i -X GET 'http://example.org/myapp/domain'`
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -37,12 +37,12 @@ Content-Type: application/json
 ----
 
 Since select chain above incorporates UriInfo, it will recognize Agrest control
-parameters passed from the client (see link:/protocol#control-parameters[Control Parameters]). Let's try using "cayenneExp" filter and "include":
+parameters passed from the client (see link:/protocol#control-parameters[Control Parameters]). Let's try using "exp" filter and "include":
 
 
 `curl -i -X GET 'http://example.org/myapp/domain?exp=vhost="mysite1.example.org"&amp;include=id'`
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
