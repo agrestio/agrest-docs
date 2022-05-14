@@ -19,4 +19,3 @@ code is available https://github.com/agrestio/agrest-docs/tree/5.x/agrest-docs-g
 include::_chapters/_01_project_setup.adoc[]
 include::_chapters/_02_cayenne_mapping.adoc[]
 include::_chapters/_03_endpoints.adoc[]
-include::_chapters/_04_interacting.adoc[]

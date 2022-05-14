@@ -31,10 +31,14 @@ public class BookApi {
         return AgJaxrs.create(Book.class, config).sync(data);
     }
 // end::post[]
+// tag::get[]
     @GET
     public DataResponse<Book> get(@Context UriInfo uriInfo) {
-        return AgJaxrs.select(Book.class, config).clientParams(uriInfo.getQueryParameters()).get();
+        return AgJaxrs.select(Book.class, config)
+                .clientParams(uriInfo.getQueryParameters())
+                .get();
     }
+// end::get[]
 // tag::base[]
 }
 // end::base[]

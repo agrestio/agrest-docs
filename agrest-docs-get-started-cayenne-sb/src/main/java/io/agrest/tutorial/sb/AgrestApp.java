@@ -11,11 +11,10 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
 
+// tag::all[]
 @SpringBootApplication
-@Component
-public class AgrestApp extends ResourceConfig {
+public class AgrestApp extends ResourceConfig { // <1>
 
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(AgrestApp.class);
@@ -25,19 +24,20 @@ public class AgrestApp extends ResourceConfig {
 
     public AgrestApp() {
 
-        // Setup Agrest Cayenne ORM backend
+        // <2>
         ServerRuntime cayenneRuntime = ServerRuntime.builder().addConfig("cayenne-project.xml").build();
-        AgCayenneModule agCayenneBackend = AgCayenneBuilder.build(cayenneRuntime);
 
-        // Setup Agrest runtime
+        // <3>
+        AgCayenneModule agCayenneBackend = AgCayenneBuilder.build(cayenneRuntime);
         AgRuntime agRuntime = AgRuntime.builder().module(agCayenneBackend).build();
 
-        // Register Agrest runtime with Jersey / JAX-RS environment
+        // <4>
         AgJaxrsFeature agFeature = AgJaxrsFeature.builder().runtime(agRuntime).build();
         register(agFeature);
 
-        // Register API endpoints
+        // <5>
         register(AuthorApi.class);
         register(BookApi.class);
     }
 }
+// end::all[]

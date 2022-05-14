@@ -28,7 +28,7 @@ Now let's generate persistent Java classes from the ORM model:
 * https://cayenne.apache.org/docs/4.2/cayenne-guide/#runModeler[Download CayenneModeler GUI and open it on your computer].
 For this tutorial you will need the latest version of the Modeler `4.2`.
 * Open `cayenne-project.xml` in the Modeler.
-* Expand the project tree on the left, navigating to `project > datamap`, and select `Class Generation` tab on the
+* Expand the project tree on the left, navigating to `project` > `datamap`, and select `Class Generation` tab on the
 right:
 
 image::img/getting-started/cgen.png[align="center"]
