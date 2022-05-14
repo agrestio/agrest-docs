@@ -2,10 +2,7 @@
 
 = Agrest Protocol
 
-include::_chapters/overview.adoc[]
-
-include::_chapters/json-documents.adoc[]
-
-include::_chapters/dates-and-times.adoc[]
-
-include::_chapters/control-parameters.adoc[]
+include::_chapters/_01_overview.adoc[]
+include::_chapters/_02_json-documents.adoc[]
+include::_chapters/_03_dates-and-times.adoc[]
+include::_chapters/_04_control-parameters.adoc[]
