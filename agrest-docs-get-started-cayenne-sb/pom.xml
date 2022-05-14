@@ -15,7 +15,7 @@
     <!-- tag::bom[] -->
     <dependencyManagement>
         <dependencies>
-            <!-- Controls versions of Spring Boot and its dependencies -->
+            <!-- Defines the versions of Spring Boot and its dependencies -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -24,7 +24,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Controls versions of Agrest modules -->
+            <!-- Defines the versions of Agrest modules -->
             <dependency>
                 <groupId>io.agrest</groupId>
                 <artifactId>agrest-bom</artifactId>
@@ -32,6 +32,13 @@
                 <version>${agrest.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+
+            <!-- Defines the version of Derby DB -->
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+                <version>10.14.2.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -62,7 +69,6 @@
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
-            <version>10.14.2.0</version>
         </dependency>
     </dependencies>
     <!-- end::agrest-dependencies[] -->

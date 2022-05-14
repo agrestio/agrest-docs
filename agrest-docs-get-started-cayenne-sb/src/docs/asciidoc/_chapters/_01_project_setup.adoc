@@ -7,7 +7,7 @@ Let’s start with a new Java Maven project created in your favorite IDE. Once y
 ----
 include::../../../../pom.xml[tag=bom]
 ----
-This will allow the `<dependencies/>` section that follows to include various Agrest modules and not
+This will allow the following `<dependencies/>` section to include Agrest, Spring and other modules and not
 worry about their individual versions. Now let's set up the `<dependencies/>` section:
 
 [source,xml,indent=0]

@@ -1,4 +1,53 @@
 == Creating ORM Mapping
 
-TODO
+Apache Cayenne is a powerful ORM. It has its own
+https://cayenne.apache.org/docs/4.2/getting-started-guide/["Getting Started" documentation]. Here we will provide
+a ready-to-use ORM model files. And you will use CayenneModeler GUI tool to generate the Java classes from the model.
+
+Start by copying the following two XML files to the `src/main/resources` folder:
+
+Model file 1: `src/main/resources/cayenne-project.xml`
+
+[source,xml,indent=0]
+----
+include::../../../main/resources/cayenne-project.xml[]
+----
+
+Model file 2: `src/main/resources/datamap.map.xml`
+
+[source,xml,indent=0]
+----
+include::../../../main/resources/datamap.map.xml[]
+----
+
+Now let's generate persistent Java classes from the ORM model:
+
+* https://cayenne.apache.org/docs/4.2/cayenne-guide/#runModeler[Download and start CayenneModeler GUI], specific to your
+operating system. For this tutorial you will need the latest version of the Modeler `4.2`.
+* Open `cayenne-project.xml` in the Modeler.
+* Expand the project tree on the left, navigating to "project > datamap", and select "Class Generation" tab on the
+right:
+
+image::..//img/cgen.jpg[align="center"]
+
+* Make sure the "Output Directory" field points to your `src/main/java` folder, and then click the "Generate" button.
+* If everything went well, you should see 4 Java classes generated under `src/main/java/io/agrest/tutorial/sb/persistence`,
+that represent our persistent entities:
+**  `auto/_Author.java`
+**  `auto/_Book.java`
+**  `Author.java`
+**  `Book.java`
+
+
+
+
+
+
+
+
+
+
+
+
+
 
