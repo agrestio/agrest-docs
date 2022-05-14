@@ -1,9 +1,9 @@
 == JSON Documents
 
-=== Response: Simple Document
+=== Simple Document
 
-This document is used in responses that contain no data, just a boolean status and a
-message. On success, it might look like this:
+This document is used in _responses_ that contain no data, just a boolean status and a message. On success, it might
+look like this:
 
 [source]
 ----
@@ -17,7 +17,6 @@ Content-Type: application/json
    "message" : "all is good"
 }
 ----
-
 
 On failure, it might look like this:
 
@@ -34,10 +33,9 @@ Content-Type: application/json
 }
 ----
 
-=== Response: Collection Document
+=== Collection Document
 
-A document that passes the data from the server to the client. This is the main
-representation of data in Agrest.
+This document is used in _responses_ that return the data from the server. This is the main representation of data in Agrest.
 
 [source]
 ----
@@ -55,24 +53,24 @@ Content-Type: application/json
 }
 ----
 
-`"data"` array contains entity objects. Implicit entity model defines what
+`data` array contains entity objects. Implicit entity model defines what
 attributes and relationships (collectively - "properties") each object has. A subset of
 properties showing in the collection document is a defined by a combination of
 server-side constraints and client request control parameters. Each object in the data
 array may contain related objects, those in turn may contain their related objects, with
 no limit on the depth of nesting.
 
-`"total"` is a number of objects one would see in the collection if there
+`total` is a number of objects one would see in the collection if there
 was no pagination. If pagination is in use (see <<Pagination>>),
 the total may be greater than the number of visible objects in the "data" array.
 Otherwise, it is equal to the size of "data".
 
 
-=== Request: Update Document
+=== Update Document
 
-Update Document is sent from the client to the server to modify an entity collection.
-It is a Collection document stripped down to its "data" section. There are two flavors -
-a single object and an array of objects:
+Update Document is sent in a _request_ body from the client to the server to modify an entity collection.
+It is a Collection document stripped down to its data section. There are two flavors - a single object and an array of
+objects:
 
 [source, JSON]
 ----
@@ -86,3 +84,4 @@ a single object and an array of objects:
    { "id" : 8, "name": "Y" }
 ]
 ----
+
