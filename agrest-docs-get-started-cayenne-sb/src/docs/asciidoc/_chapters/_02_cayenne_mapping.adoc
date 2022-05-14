@@ -28,7 +28,7 @@ operating system. For this tutorial you will need the latest version of the Mode
 * Expand the project tree on the left, navigating to `project > datamap`, and select `Class Generation` tab on the
 right:
 
-image::img/cgen.jpg[title="Cayenne Class Generation", align="center"]
+image::..//images/getting-started/cgen.jpg[align="center"]
 
 * Make sure the `Output Directory` field points to your `src/main/java` folder, and then click the `Generate` button.
 * If everything went well, you should see 4 Java classes generated under `src/main/java/io/agrest/tutorial/sb/persistence`,
