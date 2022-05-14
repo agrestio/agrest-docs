@@ -1,8 +1,8 @@
 == ORM Mapping
 
 Apache Cayenne is a powerful ORM, fully integrated with Agrest. To makes things easier for this tutorial, we will
-provide ready-to-use Cayenne ORM model files. And you will use CayenneModeler GUI tool to generate the Java classes
-from the model.
+provide ready-to-use Cayenne ORM model files. And you will generate persistent Java classes from the model with
+the CayenneModeler GUI tool.
 
 NOTE: If you want to learn more about Cayenne,
 https://cayenne.apache.org/docs/4.2/getting-started-guide/[here is a link] to get started.
