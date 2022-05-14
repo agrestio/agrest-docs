@@ -19,3 +19,9 @@ code is available https://github.com/agrestio/agrest-docs/tree/5.x/agrest-docs-g
 include::_chapters/_01_project_setup.adoc[]
 include::_chapters/_02_cayenne_mapping.adoc[]
 include::_chapters/_03_endpoints.adoc[]
+
+== Conclusion
+
+This concludes our tutorial. From here you should check the "Protocol" document on how to interact with Agrest from
+the client, and the "Server Framework" documentation for an in-depth discussion of how to write model-driven endpoints
+with user-specific schemas, security controls, a variety of backends, etc.

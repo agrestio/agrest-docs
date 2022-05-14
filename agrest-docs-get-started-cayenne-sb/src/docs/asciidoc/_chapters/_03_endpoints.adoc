@@ -156,3 +156,16 @@ curl 'http://localhost:8080/book?include=title&sort=title'
   "total":2}
 ----
 
+=== Updating Data
+
+Similar to how we implemented `POST`, you can also write `PUT` endpoints. We are leaving it as an exercise for the
+reader, but here are some hints:
+
+* `PUT` requires an `id` attribute to be present for each object in the request payload.
+* You would need to use `AgJaxrs.update(..)` method to process the request.
+
+NOTE: PUT can be used not only for updates, but also for "create-or-update" operations. Agrest has
+special methods for those: `AgJaxrs.createOrUpdate(..)`, `AgJaxrs.idempotentCreateOrUpdate(..)`, etc. Those work with objects
+that have https://en.wikipedia.org/wiki/Natural_key[natural keys] understood by the client. This is not directly
+applicable to our Book and Author entities, though with a bit of a stretch we can use `Author.name` property as
+a natural key.
