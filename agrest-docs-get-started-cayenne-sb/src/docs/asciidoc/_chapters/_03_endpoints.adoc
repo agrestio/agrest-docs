@@ -109,7 +109,7 @@ Now you can restart the app, and run the  following request:
 ----
 curl http://localhost:8080/book
 ----
-This returns the following JSON:
+
 [source,json]
 ----
 {
@@ -126,7 +126,7 @@ pass various Agrest protocol keys in the URL, to filter the result, resolve rela
 Include Author in the response, and exclude ids:
 [source,bash]
 ----
-curl 'http://localhost:8080/book?include=title&include=author.name'
+curl 'http://localhost:8080/book?exclude=id&include=author.name'
 ----
 
 [source,json]

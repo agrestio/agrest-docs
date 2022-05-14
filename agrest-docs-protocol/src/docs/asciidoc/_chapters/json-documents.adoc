@@ -5,11 +5,13 @@
 This document is used in responses that contain no data, just a boolean status and a
 message. On success, it might look like this:
 
-[source, JSON]
+[source]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+----
+[source,json]
+----
 {
    "success" : true,
    "message" : "all is good"
@@ -19,14 +21,16 @@ Content-Type: application/json
 
 On failure, it might look like this:
 
-[source, JSON]
+[source]
 ----
-HTTP/1.1 500 Server error
+HTTP/1.1 400 Bad request
 Content-Type: application/json
-
+----
+[source,json]
+----
 {
    "success" : false,
-   "message" : "Database connection failure"
+   "message" : "Unrecognized property in request"
 }
 ----
 
@@ -35,11 +39,13 @@ Content-Type: application/json
 A document that passes the data from the server to the client. This is the main
 representation of data in Agrest.
 
-[source, JSON]
+[source]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+----
+[source,json]
+----
 {
    "data" : [
       { "id" : 5, "name": "A" },
