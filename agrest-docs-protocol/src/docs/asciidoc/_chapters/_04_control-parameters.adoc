@@ -4,8 +4,8 @@ Control parameters are passed as query parameters in the request URL. Within a g
 by the server to a response <<Collection_Document,Collection Document>>. They allow the client to dynamically shape
 responses. The client can decide which object properties to include, how to sort and filter data, etc.
 
-These parameters are normally used in GET requests, however POST/PUT can also return a Collection Document, so many of
-the parameters are also applicable when modifying data.
+The parameters are normally used in GET requests, however POST/PUT can also return Collection Documents, so most of
+them are also applicable to POST/PUT.
 
 === exp
 
