@@ -9,11 +9,11 @@ object including a subset of attributes and related entities. This gives the cli
 what it needs, thus simplifying the code, minimizing the number of trips to the server, and
 optimizing the size of the response.
 
-`application/json` is used in both requests and responses where applicable.
+Content type of `application/json` is used in both requests and responses where applicable.
 Values of some control parameters below are also represented as JSON.
 
-All examples below use an imaginary CMS data model that is made of 2 entities: Domain
-and Article, with a 1..N relationship between them:
+All examples below use a data model for an imaginary CMS made of 2 entities: Domain
+and Article, with a 1-to-N relationship between them:
 
 image::img/protocol/model.png[align="center"]
 

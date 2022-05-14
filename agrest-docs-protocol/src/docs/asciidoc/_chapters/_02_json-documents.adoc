@@ -61,11 +61,9 @@ server-side constraints and client request control parameters. Each object in th
 array may contain related objects, those in turn may contain their related objects, with
 no limit on the depth of nesting.
 
-`total` is a number of objects one would see in the collection if there
-was no pagination. If pagination is in use (see <<Pagination>>),
-the total may be greater than the number of visible objects in the "data" array.
+`total` is a number of objects one would see in the collection if there was no pagination. If
+<<Pagination,pagination is in use>>, the total may be greater than the number of visible objects in the "data" array.
 Otherwise, it is equal to the size of "data".
-
 
 === Update Document
 
@@ -85,4 +83,3 @@ objects:
    { "id" : 8, "name": "Y" }
 ]
 ----
-
