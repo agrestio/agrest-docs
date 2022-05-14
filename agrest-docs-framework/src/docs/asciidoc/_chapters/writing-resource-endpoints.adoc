@@ -40,7 +40,7 @@ public SimpleResponse create(String data) {
 Here we've built a very simple "create chain" using Agrest fluent API. It starts with a
 static "create" method on Agrest class, taking a type of entity to create (Domain) and
 previously injected Configuration. Finally it calls "sync" method to execute the
-request. "data" String is expected to be an "Update Document" (see link:/protocol#request-update-document[Request: Update Document]), i.e. a single object or an array of objects.
+request. "data" String is expected to be an "Update Document" (see <<Update Document>>), i.e. a single object or an array of objects.
 Now if you compile your app and deploy it in a web container (e.g. Tomcat), you may call
 this endpoint to create new Domain objects:
 
@@ -49,11 +49,13 @@ curl -i -X POST 'http://example.org/myapp/domain' \
 >          -d '{"vhost":"mysite1.example.org","name":"My Site #1"}'
 ```
 
-[source, JSON]
+[source]
 ----
 HTTP/1.1 201 Created
 Content-Type: application/json
-
+----
+[source,json]
+----
 {"success":true}
 ----
 
@@ -91,11 +93,13 @@ client like this:
 
 `curl -i -X GET 'http://example.org/myapp/domain'`
 
-[source,json]
+[source]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+----
+[source,json]
+----
 {
     "data" : [
         { "id" : 1, "name" : "My Site #1", "vhost" : "mysite1.example.org" },
@@ -106,16 +110,18 @@ Content-Type: application/json
 ----
 
 Since select chain above incorporates UriInfo, it will recognize Agrest control
-parameters passed from the client (see link:/protocol#control-parameters[Control Parameters]). Let's try using "cayenneExp" filter and "include":
+parameters passed from the client (see <<Control Parameters>>). Let's try using "exp" filter and "include":
 
 
 `curl -i -X GET 'http://example.org/myapp/domain?exp=vhost="mysite1.example.org"&amp;include=id'`
 
-[source,json]
+[source]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+----
+[source,json]
+----
 {
     "data" : [
         { "id" : 1 }
@@ -149,11 +155,13 @@ Calling this endpoint, we'll get an expected result:
 
 `curl -i -X GET 'http://example.org/myapp/domain/1'`
 
-[source,json]
+[source]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+----
+[source,json]
+----
 {
     "data" : [
         { "id" : 1, "name" : "My Site #1", "vhost" : "mysite1.example.org" }
@@ -167,7 +175,7 @@ Document as we've seen before.
 
 === Update Entity with "PUT"
 
-To update the entity we created before <<Create Entity with `POST`>> we have to implement a `PUT` method in DomainResource class:
+To update the entity we created before <<Create Entity with "POST">> we have to implement a `PUT` method in DomainResource class:
 
 [source,java]
 ----
@@ -183,7 +191,7 @@ public SimpleResponse update(@PathParam("id") int id, String data) {
 }
 ----
 
-This simple "update chain" is very similar to the <<Create Entity with `POST`>> and the <<Read a Single Entity with `GET`>> chains.
+This simple "update chain" is very similar to the <<Create Entity with "POST">> and the <<Read a Single Entity with "GET">> chains.
 Try to send a request to this endpoint and get a result as expected
 
 ```
@@ -191,11 +199,13 @@ curl -i -X PUT 'http://example.org/myapp/domain/1' \
 >          -d '{"vhost":"mysite2.example.org","name":"My Site #2"}'
 ```
 
-[source,json]
+[source]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+----
+[source,json]
+----
 {"success":true}
 ----
 
