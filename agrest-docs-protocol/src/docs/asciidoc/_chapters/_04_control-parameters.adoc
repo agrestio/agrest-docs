@@ -1,10 +1,12 @@
 == Control Parameters
 
-Control parameters, usually passed as URL keys, apply to the Collection Document and let
-the server provide a single generic endpoint per entity, while still allowing the client
-to shape up the response Collection to its liking. These parameters are normally used with
-GET, however POST/PUT can also return a Collection Document, so many of the parameters are
-also applicable when modifying the data.
+Control parameters are passed as query parameters in the request URL. They are applied to the
+<<Collection_Document,Collection Document>> on server, and allow the client to dynamically request a variety of
+representations of the response Collection. The client can decide which object properties to include, how to sort and
+filter data, etc.
+
+These parameters are normally used in GET requests, however POST/PUT can also return a Collection Document, so many of
+the parameters are also applicable when modifying data.
 
 === exp
 

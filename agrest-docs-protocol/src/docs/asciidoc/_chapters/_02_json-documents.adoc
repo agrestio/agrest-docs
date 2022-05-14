@@ -33,6 +33,7 @@ Content-Type: application/json
 }
 ----
 
+[#Collection_Document]
 === Collection Document
 
 This document is used in _responses_ that return the data from the server. This is the main representation of data in Agrest.
