@@ -1,10 +1,13 @@
 == Creating ORM Mapping
 
-Apache Cayenne is a powerful ORM. It has its own
-https://cayenne.apache.org/docs/4.2/getting-started-guide/["Getting Started" documentation]. Here we will provide
-a ready-to-use ORM model files. And you will use CayenneModeler GUI tool to generate the Java classes from the model.
+Apache Cayenne is a powerful ORM, fully integrated with Agrest. To makes things easier for this tutorial, we will
+provide ready-to-use Cayenne ORM model files. And you will use CayenneModeler GUI tool to generate the Java classes
+from the model.
 
-Start by copying the following two XML files to the `src/main/resources` folder:
+NOTE: If you want to learn more about Cayenne,
+https://cayenne.apache.org/docs/4.2/getting-started-guide/[here is a link] to get started.
+
+The following 2 XML files comprise Cayenne mapping project. Copy both of them to the `src/main/resources` folder:
 
 Model file 1: `src/main/resources/cayenne-project.xml`
 
