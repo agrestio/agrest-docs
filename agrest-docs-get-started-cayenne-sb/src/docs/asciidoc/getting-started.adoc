@@ -24,5 +24,5 @@ include::_chapters/_04_custom_property.adoc[]
 == Conclusion
 
 This concludes our tutorial. From here you should check the "Protocol" document on how to interact with Agrest from
-the client, and the "Server Framework" documentation for an in-depth discussion of how to write model-driven endpoints
+the client, and the "Server Framework" document for an in-depth discussion of how to write model-driven endpoints
 with user-specific schemas, security controls, a variety of backends, etc.
