@@ -111,7 +111,7 @@
                         <basedir>${project.basedir}</basedir>
                         <sourcedir>${project.build.sourceDirectory}</sourcedir>
 
-                        <imagesdir>images</imagesdir>
+                        <imagesdir>..</imagesdir>
                         <icons>font</icons>
 
                         <sectanchors>true</sectanchors>

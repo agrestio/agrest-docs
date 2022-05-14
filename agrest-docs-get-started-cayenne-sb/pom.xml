@@ -78,11 +78,6 @@
             <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
-                <configuration>
-                    <attributes>
-                        <imagesdir>..</imagesdir>
-                    </attributes>
-                </configuration>
                 <executions>
                     <!-- generate "embeddable" html content with front matter and without header/footer/styles -->
                     <execution>
