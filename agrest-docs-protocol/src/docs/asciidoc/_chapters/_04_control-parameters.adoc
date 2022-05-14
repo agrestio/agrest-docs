@@ -6,7 +6,7 @@ to shape up the response Collection to its liking. These parameters are normally
 GET, however POST/PUT can also return a Collection Document, so many of the parameters are
 also applicable when modifying the data.
 
-=== Filtering Collection with `exp`
+=== Filtering Collection with "exp"
 
 NOTE: "exp" key was first introduced in Agrest 4.1. Previously it was called "cayenneExp".
 Both are synonymous. "cayenneExp" is still supported, though should be considered deprecated.
@@ -36,7 +36,7 @@ Example 4: Filtering with parameters using named bindings.
 `exp={ "exp" : "articles.body like $b", "params":{"b":"%Agrest%"}}`
 
 
-=== Ordering Collection with `sort / dir`
+=== Ordering Collection with "sort" / "dir"
 
 Example 1: Sort on a single property.
 
@@ -60,7 +60,7 @@ Example 4: Multiple sortings as a single JSON structure.
 
 
 [#Pagination]
-=== Pagination with `start / limit`
+=== Pagination with "start" / "limit"
 
 These two parameters are used together to request from the server a range of objects
 for a potentially huge collection. They allow to implement efficient data pagination on the client.
@@ -75,7 +75,7 @@ offset are discarded from the collection. Default "start" is 0.
 `?start=2&amp;limit=5` would result in objects 2 through 6 returned from the server. Returned Collection "total" would still be 10.
 
 
-=== Structuring Collection with `mapBy`
+=== Structuring Collection with "mapBy"
 
 Agrest presents the response as an array of entities <<Response: Collection Document>>.
 E.g. Request of articles returns the following array:
@@ -96,7 +96,7 @@ Using `mapBy` this array can be transformed to a map. One of entity fields is us
 
 `mapBy=publishedOn`
 
-[source, JSON]
+[source,json]
 ----
 {
 "data" : {
@@ -112,8 +112,7 @@ Using `mapBy` this array can be transformed to a map. One of entity fields is us
 }
 ----
 
-
-=== Shaping Collection with `include / exclude`
+=== Shaping Objects with "include" / "exclude"
 
 Model entities may have "simple" properties (attributes) and properties that point to
 related entities (relationships). By default Collection Document contains entity

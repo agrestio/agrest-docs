@@ -20,7 +20,7 @@ public class DomainResource {
 }
 ----
 
-=== Create Entity with `POST`
+=== Create Entity with "POST"
 
 Now let's implement a `POST` method in DomainResource class:
 
@@ -67,7 +67,7 @@ INFO CommonsJdbcEventLogger - Generated PK: domain.id = 1
 INFO CommonsJdbcEventLogger - === updated 1 row.
 ----
 
-=== Read Collection of Entities with `GET`
+=== Read Collection of Entities with "GET"
 
 You may create more Domain objects, executing `POST` request above. Now
 let's write a `GET` method to search for domains:
@@ -91,7 +91,7 @@ client like this:
 
 `curl -i -X GET 'http://example.org/myapp/domain'`
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -111,7 +111,7 @@ parameters passed from the client (see link:/protocol#control-parameters[Control
 
 `curl -i -X GET 'http://example.org/myapp/domain?exp=vhost="mysite1.example.org"&amp;include=id'`
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -124,12 +124,12 @@ Content-Type: application/json
 }
 ----
 
-=== Read a Single Entity with `GET`
+=== Read a Single Entity with "GET"
 
 A common request is to locate a single instance of an entity by ID. Here is how
 this can be done with Agrest:
 
-[source, Java]
+[source,java]
 ----
 import io.agrest.DataResponse;
 import io.agrest.Ag;
@@ -149,7 +149,7 @@ Calling this endpoint, we'll get an expected result:
 
 `curl -i -X GET 'http://example.org/myapp/domain/1'`
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -165,11 +165,11 @@ Content-Type: application/json
 Even though we expect at most one object to be returned, the response is the same Collection
 Document as we've seen before.
 
-=== Update Entity with `PUT`
+=== Update Entity with "PUT"
 
 To update the entity we created before <<Create Entity with `POST`>> we have to implement a `PUT` method in DomainResource class:
 
-[source, Java]
+[source,java]
 ----
 import io.agrest.Ag;
 import io.agrest.SimpleResponse;
@@ -184,14 +184,14 @@ public SimpleResponse update(@PathParam("id") int id, String data) {
 ----
 
 This simple "update chain" is very similar to the <<Create Entity with `POST`>> and the <<Read a Single Entity with `GET`>> chains.
-Try to sent a request to this endpoint and get a result as expected
+Try to send a request to this endpoint and get a result as expected
 
 ```
 curl -i -X PUT 'http://example.org/myapp/domain/1' \
 >          -d '{"vhost":"mysite2.example.org","name":"My Site #2"}'
 ```
 
-[source, JSON]
+[source,json]
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
