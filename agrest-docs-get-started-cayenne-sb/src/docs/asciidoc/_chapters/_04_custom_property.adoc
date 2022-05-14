@@ -1,4 +1,4 @@
-== Adding Custom Property
+== Custom Property
 
 Agrest has a powerful API for building REST entity schemas, but so far we didn't have to interact with it.
 Agrest simply took the existing model from Cayenne and exposed each ORM entity as a REST entity. In reality REST

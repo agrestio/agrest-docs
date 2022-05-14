@@ -1,4 +1,4 @@
-== Writing REST Endpoints
+== REST Endpoints
 
 === Creating data with POST
 
