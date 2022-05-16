@@ -2,19 +2,18 @@
 
 = Getting Started
 
-Through this tutorial we will be building a simple Bookstore REST application using Agrest with a relational database.
-Agrest can work with various REST API stacks and different backends. So there are some choices to make for the
-purpose of the tutorial. We decided to use the following components:
+Through this tutorial we will be building a simple Bookstore REST application using Agrest and a relational database.
+Agrest can work with various Java REST API stacks and backends. So there are some choices to make for the
+purpose of the tutorial. So we decided to use the following components:
 
 * SpringBoot / Jersey
 * Derby database
 * Apache Cayenne ORM backend
 
-To build the project, we'll be using Maven and Java 17. But keep in mind that Agrest would work fine with Gradle and
-supports Java versions 11 and higher.
+We'll be using Maven and Java 17 to build and run the project. If you prefer Gradle, it should work as well of course.
 
-_The tutorial document will focus on the important pieces to understand how to write an Agrest application. The full
-code is available https://github.com/agrestio/agrest-docs/tree/5.x/agrest-docs-get-started-cayenne-sb[on Github]._
+_The full code of the tutorial is available
+https://github.com/agrestio/agrest-docs/tree/5.x/agrest-docs-get-started-cayenne-sb[on Github]._
 
 include::_chapters/_01_project_setup.adoc[]
 include::_chapters/_02_cayenne_mapping.adoc[]
