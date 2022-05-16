@@ -1,6 +1,6 @@
 == REST Endpoints
 
-=== Create data with POST
+=== POST: Create data
 
 Let's write a couple of POST endpoints to allow users to create Authors and Books. We'll start by creating Java classes
 `AuthorApi` and `BookApi`, placing a few JAX-RS annotations on them, and injecting JAX-RS `Configuration` object:
@@ -96,7 +96,7 @@ Date: Sat, 14 May 2022 09:43:01 GMT
 {"success":true}
 ----
 
-=== Select Data
+=== GET: Select Data
 
 Now that we have some data in the DB, let's build an endpoint to retrieve it via `GET` requests. In `BookApi` add
 the following method:
@@ -156,7 +156,7 @@ curl 'http://localhost:8080/book?include=title&sort=title'
   "total":2}
 ----
 
-=== Update Data
+=== PUT: Update Data
 
 Similar to how we implemented `POST`, you can also write `PUT` endpoints. We are leaving it as an exercise for the
 reader, but here are some hints:
