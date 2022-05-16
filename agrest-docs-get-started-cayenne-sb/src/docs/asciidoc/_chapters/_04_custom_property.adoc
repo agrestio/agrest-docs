@@ -33,5 +33,5 @@ curl 'http://localhost:8080/book?exclude=id&include=author.name&include=author.a
 }
 ----
 
-We can see that as of this writing, Hemingway was 122 years old. Again, `@AgAttribute` on getters is not the only
+We can see that as of this writing, Hemingway was 122 years old. `@AgAttribute` on getters is not the only
 way to add custom properties, bit it is very handy for simple calculated properties like our example.
