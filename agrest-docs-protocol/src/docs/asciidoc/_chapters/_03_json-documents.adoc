@@ -1,0 +1,74 @@
+== JSON Documents
+
+=== Simple Response
+
+This document is used in response to POST, PUT or DELETE when no entity data is returned to the client.
+
+[source,json]
+----
+{
+   "success" : true,
+   "message" : "..."
+}
+----
+.Simple Response Document properties
+[cols="1,15,~"]
+|===
+|`success`
+|boolean
+|Whether the request was successful. This property is redundant and exists for legacy reasons only. It will be removed in
+the future. Client code should ignore it, and rely on the HTTP status code instead.
+|`message`
+|string
+|An optional human-readable message, usually provided to explain reasons of a failure.
+|===
+
+=== Collection Response
+
+This document is used in response to GET, POST or PUT to return data from the server. This is the main representation
+of data in Agrest.
+
+[source,json]
+----
+{
+   "data" : [
+      { "id" : 5, "name": "A" },
+      { "id" : 8, "name": "B" }
+   ],
+   "total" : 2
+}
+----
+
+.Collection Response Document properties
+[cols="1,15,~"]
+|===
+|`data`
+|list or object
+|A list (or sometimes, an object) that contains entity objects. The schema of the objects is implicit, and depends on
+the endpoint model and request <<Control Parameters, control parameters>>. Each object may contain other objects, with
+an arbitrary number of nesting levels.
+|`total`
+|int
+|The total number of objects in the collection. This is usually equal to the size of the `data` list. Except when
+<<Pagination,pagination>> is in use, in which case the total corresponds to the size of the collection ignoring
+pagination. I.e. it may be greater than the number of the returned objects in the "data" array.
+|===
+
+=== Update Request
+
+This document is used as a body of POST or PUT requests to pass the data from the client to the server to modify an
+entity collection. It is either a single objects or a collection of objects (so pure custom model, no Agrest-specific
+properties) :
+
+[source,json]
+----
+{ "id" : 5, "name": "X" }
+----
+
+[source,json]
+----
+[
+   { "id" : 5, "name": "X" },
+   { "id" : 8, "name": "Y" }
+]
+----

@@ -1,0 +1,17 @@
+== Protocol Conventions
+
+As things often are in the REST world, Agrest protocol is quite loose. Many elements are conventions rather
+than hard requirements, but following them would produce consistent, easy-to-understand APIs. Here are some common
+conventions for writing Agrest endpoints, some reflected in the default server framework, others left to the developer
+to follow:
+
+* Content type of GET, POST, PUT responses serving <<Simple Response,simple documents>> or
+<<Collection Response,collection documents>> is `application/json`
+* Content type of POST and PUT requests consuming <<Update Request,update documents>> is `application/json`
+* Control parameters are passed as URL query parameters (e.g. `my?include=name`)
+* Individual object ids are passed as URL path components (e.g. `/my/5`)
+* Standard HTTP status codes are used to convey either a success or a failure of a request
+* Dates and times in requests and responses are in https://en.wikipedia.org/wiki/ISO_8601[ISO 8601] format. E.g.
+`2022-04-19T11:08:53Z`, `2023-04-10T11:08`, `1979-04-19`
+
+

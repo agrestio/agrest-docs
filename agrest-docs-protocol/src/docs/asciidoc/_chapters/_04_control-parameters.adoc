@@ -1,43 +1,84 @@
 == Control Parameters
 
-Control parameters are passed as query parameters in the request URL. Within a given request, they are applied
-by the server to a response <<Collection_Document,Collection Document>>. They allow the client to dynamically shape
-responses. The client can decide which object properties to include, how to sort and filter data, etc.
+Agrest protocol control parameters are `exp`, `sort`, `dir`, `start`, `limit`, `mapBy`, `include`, `exclude`. They are
+passed as URL query parameters (e.g. `my?include=name`) with the goal to shape the <<Collection Response>> document.
+With their help, the client can decide how to sort, filter, paginate the objects in the `data` collection, and which
+object properties to include.
 
-The parameters are normally used in GET requests, however POST/PUT can also return Collection Documents, so most of
-them are also applicable to POST/PUT.
+These parameters are applied to `GET` and often to `POST` and `PUT` requests (when those latter ones return
+<<Collection Response>>).
+
+Parameter values can be either simple strings/numbers or short JSON structures. JSON structures may require proper URL
+encoding to be done by the client.
 
 === exp
 
-`exp` parameter is used to filter objects in the response collection.
+`exp` is used to filter objects in the response collection. It can take one of the three forms, depending on the
+parameter binding style:
+[source]
+----
+exp=<exp_string> <1>
+exp=["<exp_string>", "value1", "value2"] <2>
+exp={"exp"="<exp_string>", "params":{ "param1" : "value1", "param2", "value2"}} <3>
+----
 
-NOTE: "exp" parameter was first introduced in Agrest 4.1. Previously it was called "cayenneExp".
-Both are synonymous. "cayenneExp" is still supported, though is considered deprecated.
+<1> Without parameters, an expression it is just a string (we'll explain what `exp_string` is shortly)
+<2> An expression with parameter resolution _by position_ is represented as a list, where the expression string is the first
+element, and all subsequent elements are positional parameters
+<3> An expression with parameter resolution _by name_ is represented as a map with "exp" and "params" properties
 
-A condition expression used to filter the response objects. Expression follow syntax of the
-https://cayenne.apache.org/docs/4.0/cayenne-guide/expressions.html[Apache Cayenne expressions].
-An implicit "root" for the property paths is the request entity, (unless "exp" is used within
-an "include" JSON, in which case the root is that related entity).
+`exp_string` is a conditional expression based on Agrest own "expression DSL", that should be intuitively understood
+by most programmers. Here are some examples:
 
-Example 1: Filtering on a single property.
+[source]
+----
+name='Ernest Hemingway'
+books.title = 'A Farewell to Arms'
+title = not in ('A Farewell to Arms', 'For Whom the Bell Tolls')
+title like 'A%' and author.dateOfBirth > $afterDate
+----
 
-`exp=vhost='agrest.io'`
+_TODO: A more comprehensive Agrest exp format specification is forthcoming. Until then, please check
+https://cayenne.apache.org/docs/4.2/cayenne-guide/expressions.html[Apache Cayenne expressions] that use practically
+the same syntax (except Agrest would not allow "db:" expressions). And see the examples below_
 
+A few things to note about the examples above:
 
-Example 2: Filtering using outer join (the "+" sign is notation for "outer").
+* Expressions use dot-separated paths to refer to the values of object properties
+* There is an implicit "root entity" to which the paths are applied. It is either the main entity of
+the request or, when an expression is used inside an `include`, a related entity. So `name` and `books.title` would work
+with `Author`, while `title` and `author.dateOfBirth` - with `Book`.
+* Parameters always start with a "$" sign, regardless whether they are resolved by name or by position
 
-`exp=articles+ = null`
+Here are a few complete examples:
 
+Example 1: Filtering on a single property:
+[source]
+----
+exp=name='Ernest Hemingway'
+----
 
-Example 3: Filtering with parameters using positional bindings.
+Example 2: Filtering on a relationship with outer join (the "+" sign is notation for "outer"). Comparing to null returns
+all authors who have no books in the system:
 
-`exp=["articles.body like $b","%Agrest%"]`
+[source]
+----
+exp=books+ = null
+----
 
+Example 3: Parameter resolution by position:
 
-Example 4: Filtering with parameters using named bindings.
+[source]
+----
+exp=["author.dateOfBirth > $afterDate","1900-01-01"]
+----
 
-`exp={ "exp" : "articles.body like $b", "params":{"b":"%Agrest%"}}`
+Example 4: Parameter resolution by name:
 
+[source]
+----
+exp={"exp":"author.dateOfBirth > $afterDate", "params":{"afterDate":"1900-01-01" }}
+----
 
 === sort / dir
 
