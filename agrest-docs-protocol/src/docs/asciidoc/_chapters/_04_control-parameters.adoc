@@ -24,9 +24,9 @@ exp={"exp"="<exp_string>", "params":{ "param1" : "value1", "param2", "value2"}} 
 ----
 
 <1> Without parameters, an expression it is just a string (we'll explain what `exp_string` is shortly)
-<2> An expression with parameter resolution _by position_ is represented as a list, where the expression string is the first
+<2> An expression with parameter resolution _by position_ is represented as a JSON list, where the expression string is the first
 element, and all subsequent elements are positional parameters
-<3> An expression with parameter resolution _by name_ is represented as a map with "exp" and "params" properties
+<3> An expression with parameter resolution _by name_ is represented as a JSON object with "exp" and "params" properties
 
 `exp_string` is a conditional expression based on Agrest own "expression DSL", that should be intuitively understood
 by most programmers. Here are some examples:
