@@ -245,7 +245,7 @@ of a given entity, and none of the relationships.
 
 Now let's see the examples:
 
-NOTE: In the examples below we will omit the `{"data":[..],"total":N}` collection document wrapper, and will only
+NOTE: In the examples below we will omit the `{"data":[..],"total": .. }` collection document wrapper, and will only
 show the structure of an individual object within the "data" collection.
 
 Example 1: Include the id and the attributes, but exclude the "genre" attribute:
