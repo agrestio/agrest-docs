@@ -56,8 +56,8 @@ pagination. I.e. it may be greater than the number of the returned objects in th
 
 === Update Request
 
-This document is used as a body of POST or PUT requests to pass the data from the client to the server to modify an
-entity collection. It is either a single objects or a collection of objects (so pure custom model, no Agrest-specific
+This document is used as a body of a POST or PUT request to pass the data from the client to the server to modify an
+entity collection. It is either a single object or a collection of objects (so pure custom model, no Agrest-specific
 properties) :
 
 [source,json]
