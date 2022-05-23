@@ -15,6 +15,7 @@ encoding to be done by the client.
 
 `exp` is used to filter objects in the response collection. It can take one of the three forms, depending on the
 parameter binding style:
+
 [source]
 ----
 exp=<exp_string> <1>
@@ -53,6 +54,7 @@ with `Author`, while `title` and `author.dateOfBirth` - with `Book`.
 Here are a few examples using an expression key (not showing URL encoding):
 
 Example 1: Filtering on a single property:
+
 [source]
 ----
 exp=name='Ernest Hemingway'
@@ -135,7 +137,7 @@ Example 4: Sort by multiple properties with a list of sort objects:
 
 [source]
 ----
-`sort=[{"property":"name"},{"property":"dateOfBirth","direction":"DESC"}]`
+sort=[{"property":"name"},{"property":"dateOfBirth","direction":"DESC"}]
 ----
 
 [#Pagination]
