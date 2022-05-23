@@ -50,12 +50,14 @@ the request or, when an expression is used inside an `include`, a related entity
 with `Author`, while `title` and `author.dateOfBirth` - with `Book`.
 * Parameters always start with a "$" sign, regardless whether they are resolved by name or by position
 
-Here are a few complete examples:
+Here are a few examples using an expression key (not showing URL encoding):
 
 Example 1: Filtering on a single property:
 [source]
 ----
 exp=name='Ernest Hemingway'
+exp=name like 'E%'
+exp=name likeIgnoreCase '%ab%'
 ----
 
 Example 2: Filtering on a relationship with outer join (the "+" sign is notation for "outer"). Comparing to null returns
@@ -82,43 +84,75 @@ exp={"exp":"author.dateOfBirth > $afterDate", "params":{"afterDate":"1900-01-01"
 
 === sort / dir
 
-`sort` and `dir` parameters are used to order objects in the response collection.
+`sort` and `dir` are used to order objects in the response collection. The following forms are supported:
 
-Example 1: Sort on a single property.
+[source]
+----
+// ascending sort by a single property
+sort=<prop_path>
 
-`sort=vhost`
+// sort by a single property with explicit direction
+sort=<prop_path>&dir=<dir_spec>
 
-Example 2: Sort descending on a property.
+// sort by a single property with a sort object
+sort=<json_sort_object>
 
-`sort=id&amp;dir=DESC`
+// sort by multiple properties with a list of sort objects
+sort=[<json_sort_object>,...]
+----
 
-`dir` can be one of `ASC` (default), `DESC`, `ASC_CI` (for case-insensitive asending ordering), `DESC_CI` (for case-insensitive descending ordering)
+`dir` is added to specify sort direction when sorting is done on a single property. It can have one of these values:
 
-Example 3: Same as 2, but sort is a JSON object.
+* `ASC`: this is also the default, when no `dir` is provided
+* `DESC`
+* `ASC_CI`: for case-insensitive ascending ordering
+* `DESC_CI`: for case-insensitive descending ordering
 
-`sort={"property":"vhost","direction":"DESC"}`
+`<json_sort_object>` allows to specify the property and the direction ion one place and has a form of
+`{"property": .., "direction": .. }`. `direction` is optional and takes the same values as `dir`. Let's demonstrate all
+the flavors with some examples:
 
-`direction` takes the same values as `dir` above - `ASC` (implied default), `DESC`, `ASC_CI`, `DESC_CI`
+Example 1: Ascending sort by a single property:
 
-Example 4: Multiple sortings as a single JSON structure.
+[source]
+----
+sort=name
+----
 
-`sort=[{"property":"name"},"property":"vhost","direction":"DESC"}]`
+Example 2: Descending sort by a single property with explicit direction:
 
+[source]
+----
+sort=id&dir=DESC
+----
+
+Example 3: Descending sort by a single property with a sort object:
+
+[source]
+----
+sort={"property":"id","direction":"DESC"}
+----
+
+Example 4: Sort by multiple properties with a list of sort objects:
+
+[source]
+----
+`sort=[{"property":"name"},{"property":"dateOfBirth","direction":"DESC"}]`
+----
 
 [#Pagination]
 === start / limit
 
-`start` and `limit` parameters are used to implement client-controlled pagination of the response collection.
-They are used together or separately to request a range of objects in a bigger collection.
+`start` and `limit` parameters are used for client-controlled pagination of a response collection. They can be used
+together or individually to request a range of objects in a collection.
 
-`start` is an offset within the "data" array. All the objects below this offset are discarded from the collection.
-Default `start` is 0.
+`start` is an offset within the "data" array. All the objects below this offset are discarded from the response
+collection. Default `start` is 0.
 
 `limit` is a maximum number of objects in the collection "data". Default is no limit.
 
-`limit` is applied after `start`. So for a collection with a total of 10 objects,
-`?start=2&amp;limit=5` would result in objects 2 through 6 returned from the server. Returned Collection "total" would still be 10.
-
+`limit` is applied after `start`. So for a collection of 10 objects, `?start=2&limit=5` would result in objects 2
+through 6 returned from the server. Returned Collection "total" would still be 10.
 
 === mapBy
 
@@ -129,28 +163,27 @@ property. E.g. consider a typical list response:
 ----
 {
 "data" : [
-    { "title" : "Agrest mapBy",  "body" : "mapBy is used ..", "publishedOn" : "6 July, 2018" },
-    { "title" : "Other Tech News",  "body" : "Java community ..", "publishedOn" : "8 October, 2017" },
-    { "title" : "Introducing Agrest",  "body" : "Agrest is a ..", "publishedOn" : "6 July, 2018" }
+    { "id" : 8, "title" : "One Hundred Years of Solitude",  "genre" : "fiction" },
+    { "id" : 5, "title" : "Battle Cry of Freedom",  "genre" : "history" },
+    { "id" : 12, "title" : "For Whom the Bell Tolls",  "genre" : "fiction" }
   ],
   "total":3
 }
 ----
 
-Using `mapBy` it can be transformed to a map:
-
-`mapBy=publishedOn`
+Using `mapBy=genre` it can be transformed to a map. The total here is still the number of all objects in all the maps
+combined:
 
 [source,json]
 ----
 {
 "data" : {
-    "8 October, 2017" : [
-        { "title" : "Other Tech News",  "body" : "Java community …", "publishedOn" : "8 October, 2017" }
+    "fiction" : [
+        { "id" : 8, "title" : "One Hundred Years of Solitude",  "genre" : "fiction" },
+        { "id" : 12, "title" : "For Whom the Bell Tolls",  "genre" : "fiction" }
     ],
-    "6 July, 2018" : [
-        { "title" : "Agrest mapBy",  "body" : "mapBy is used …", "publishedOn" : "6 July, 2018" },
-        { "title" : "Introducing Agrest",  "body" : "Agrest is a …", "publishedOn" : "6 July, 2018" }
+    "history" : [
+        { "id" : 5, "title" : "Battle Cry of Freedom",  "genre" : "history" }
     ]
   },
   "total" : 3
@@ -159,124 +192,183 @@ Using `mapBy` it can be transformed to a map:
 
 === include / exclude
 
-`include` and `exclude` parameters are used to recursively shape individual objects in the response collection. Model
-entities may have "simple" properties (attributes) and properties that point to
-related entities (relationships). By default, Collection Document contains entity
-representation that includes its "id", all of its attributes, and none of the
-relationships. "include" and "exclude" parameters allow the client to request a specific
-subset of entity properties, including related entities. Some examples are given below,
-showing include/exclude parameters and resulting entity contents.
+`include` and `exclude` are used to recursively shape individual objects in a response collection. These are the
+controls that turn your REST endpoints from fixed models to _graphs_ that can be dynamically navigated by the clients.
 
-Example 1: Include default properties (all entity attributes) minus "vhost" attribute.
+`exclude` format:
+[source]
+----
+// a single property path
+exclude=<prop_path>
 
-`exclude=vhost`
+// a JSON array of property paths
+exclude=[<prop_path>,...]
+----
+
+`include` format:
+[source]
+----
+// a single property path
+include=<prop_path>
+
+// a JSON include object
+include=<json_include_object>
+
+// a JSON array of property paths and include objects
+include=[<prop_path_or_json_include_object>,...]
+----
+
+`<json_include_object>` has the following format:
+
+[source]
+----
+{
+    "path": .. , // the only required property
+    "exp": .. ,
+    "sort": .. ,
+    "start": ..,
+    "limit": ..
+    "mapBy": ..
+    "include": ...
+}
+----
+
+The only required property is `path` that determines which property is included. If the `path` points to a relationship,
+the object can contain properties corresponding to all the individual controls we've seen already (even a nested `include`!).
+Those controls are applied to the related entity denoted by the `path`.
+
+A few more notes before we show the examples:
+
+* What is included by default? As we've discussed above, Agrest model entities consist of id, attribute and relationship
+properties. If no includes are specified, <<Collection Response>> document would contain the id and all the attributes
+of a given entity, and none of the relationships.
+* Multiple `include` and `exclude` parameters can be used in a single request. They will be combined together.
+
+Now let's see the examples:
+
+NOTE: In the examples below we will omit the `{"data":[..],"total":N}` collection document wrapper, and will only
+show the structure of an individual object within the "data" collection.
+
+Example 1: Include the id and the attributes, but exclude the "genre" attribute:
+
+[source]
+----
+exclude=genre
+----
 
 [source,json]
 ----
-{ "id" : 45, "name" : "Agrest Site" }
+{ "id" : 8, "title" : "One Hundred Years of Solitude" }
 ----
 
-Example 2: Exclude all properties, but "id".
+Example 2: Only include "id":
 
-`include=id`
+[source]
+----
+include=id
+----
 
 [source,json]
 ----
-{ "id" : 45 }
+{ "id" : 8 }
 ----
 
-Example 3: Multiple includes, one of them points to attributes of related entity.
+Example 3: Multiple includes, one of them pointing to the attributes of a related entity:
 
-`include=id&amp;include=articles.title`
+[source]
+----
+include=id&include=author.name
+----
+
+[source,json]
+----
+{ "id" : 8, "author" : {"name" : "Gabriel García Márquez"} }
+----
+
+Example 4: JSON include object with sorting, filtering and a nested include:
+
+[source]
+----
+include={"path":"books","exp":"title like '%a%'","sort":"title", "include":"title"}
+----
 
 [source,json]
 ----
 {
-   "id" : 45,
-   "articles" : [
-      { "title" : "Agrest Includes" },
-      { "title" : "Other Tech News" },
-      { "title" : "Introducing Agrest" }
+   "books" : [
+      { "title" : "Autumn of the Patriarch" },
+      { "title" : "One Hundred Years of Solitude" }
    ]
 }
 ----
 
-Example 4: Advanced include. Include specification can itself be a JSON object and
-contain `"exp"`, `"sort"`, `"start"` and `"limit"` keys shaping up a collection
-of related objects for each root object.
+Example 5: JSON include object with mapBy and a nested include:
 
-`include={"path":"articles","exp":"title like '%Agrest%'","sort":"title"}&amp;include=articles.title`
+[source]
+----
+include={"path":"books","mapBy":"genre", "include":"id"}
+----
 
 [source,json]
 ----
 {
-   "id" : 45,
-   "articles" : [
-      { "title" : "Introducing Agrest" },
-      { "title" : "Agrest Includes" }
-   ]
-}
-----
-
-Example 5: Related objects as a map. Here we'll map article bodies by title.
-
-`include={"path":"articles","mapBy":"title"}&amp;include=articles.body`
-
-[source,json]
-----
-{
-   "articles" : {
-      "Introducing Agrest" : { "body" : "Agrest is a .." },
-      "Agrest Includes" : { "body" : "Includes are .." }
+   "books" : {
+      "fiction" : [
+        { "id" : 55 },
+        { "id" : 8 }
+      ]
    }
 }
 ----
 
-Example 6: Include and Exclude parameters have ability to take an array of values:
+Example 6: Include and Exclude parameters can take an array of values:
 
-`include=["id","name"]`
+[source]
+----
+include=["id","name"]
+----
 
 [source,json]
 ----
-{ "id" : 45, "name" : "Agrest Site" }
+{ "id" : 45, "name" : "Gabriel García Márquez"}
 ----
 
-Example 7: The array can contain both the simple include and the advanced include values
+Example 7: The include array can contain a combination of paths and include objects:
 
-`include=["id","articles.title",{"path":"articles","exp":"title like '%Agrest%'"}]`
-
-[source,json]
+[source]
 ----
-{
-   "id" : 45,
-   "articles" : [
-      { "title" : "Introducing Agrest" },
-      { "title" : "Agrest Includes" }
-   ]
-}
+include=["id","books.title",{"path":"books","exp":"title like %a%'"}]
 ----
-
-Example 8: Attributes of a related entity can be presented as an inner array in JSON format:
-
-`include=["id","name",{"articles":["title","body"]}]`
 
 [source,json]
 ----
 {
    "id" : 45,
-   "name" : "Agrest Site",
-   "articles" : [
-      { "title" : "Introducing Agrest", "body" : "Agrest is a .." },
-      { "title" : "Agrest Includes", "body" : "Includes are .." }
+   "books" : [
+      { "title" : "Autumn of the Patriarch" },
+      { "title" : "One Hundred Years of Solitude" }
    ]
 }
 ----
 
-Example 9: The related entity can be specified as a path value:
+Example 8: Include array is recursive. Attributes of a related entity can be specified as a JSON array. Also, there is a
+shortcut - instead of `{"path":"books","include":[..]}}`, we are using `{"books":[..]}` :
 
-`include=["id","name",{"articles.categories":["id","name"]}]`
 
-Example 10: The advanced include can contain the array of include values:
+[source]
+----
+include=["id",{"books":["id", "title"]}]
+----
 
-`include={"path":"articles","sort":"title","include":["title",{"categories":["id","name"]}]}`
+[source,json]
+----
+{
+   "id" : 45,
+   "books" : [
+      { "id" : 55, "title" : "Autumn of the Patriarch" },
+      { "id" : 8, "title" : "One Hundred Years of Solitude" }
+   ]
+}
+----
+
 

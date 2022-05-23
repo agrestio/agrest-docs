@@ -32,6 +32,7 @@ Author
 Book
   - id : long
   - title : string
+  - genre: string
   - author : Author
 ```
 As you see, the model consists of two entities (Author and Book), each with an "id" property, some value properties
