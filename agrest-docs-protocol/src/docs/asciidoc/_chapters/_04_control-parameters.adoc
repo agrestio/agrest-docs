@@ -88,18 +88,16 @@ exp={"exp":"author.dateOfBirth > $afterDate", "params":{"afterDate":"1900-01-01"
 
 [source]
 ----
-// ascending sort by a single property
-sort=<prop_path>
-
-// sort by a single property with explicit direction
-sort=<prop_path>&dir=<dir_spec>
-
-// sort by a single property with a sort object
-sort=<json_sort_object>
-
-// sort by multiple properties with a list of sort objects
-sort=[<json_sort_object>,...]
+sort=<prop_path> <1>
+sort=<prop_path>&dir=<dir_spec> <2>
+sort=<json_sort_object> <3>
+sort=[<json_sort_object>,...] <4>
 ----
+
+<1> Ascending sort by a single property
+<2> Sort by a single property with explicit direction
+<3> Sort by a single property with a sort object
+<4> Sort by multiple properties with a list of sort objects
 
 `dir` is added to specify sort direction when sorting is done on a single property. It can have one of these values:
 
@@ -108,9 +106,9 @@ sort=[<json_sort_object>,...]
 * `ASC_CI`: for case-insensitive ascending ordering
 * `DESC_CI`: for case-insensitive descending ordering
 
-`<json_sort_object>` allows to specify the property and the direction ion one place and has a form of
-`{"property": .., "direction": .. }`. `direction` is optional and takes the same values as `dir`. Let's demonstrate all
-the flavors with some examples:
+`<json_sort_object>` allows to specify both the property and the direction in one place and has a form of
+`{"property": .., "direction": .. }`. `direction` is optional and takes the same values as `dir`. Let's demonstrate
+all the flavors with a few examples:
 
 Example 1: Ascending sort by a single property:
 
