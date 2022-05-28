@@ -2,6 +2,8 @@
 
 = Agrest Protocol
 
+_Protocol Version 1.2_
+
 include::_chapters/_01_overview.adoc[]
 include::_chapters/_02_conventions.adoc[]
 include::_chapters/_03_json-documents.adoc[]

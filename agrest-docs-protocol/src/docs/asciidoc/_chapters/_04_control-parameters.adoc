@@ -87,7 +87,7 @@ exp={"exp":"author.dateOfBirth > $afterDate", "params":{"afterDate":"1900-01-01"
 [source]
 ----
 sort=<prop_path> <1>
-sort=<prop_path>&dir=<dir_spec> <2>
+sort=<prop_path>&direction=<direction_spec> <2>
 sort=<json_sort_object> <3>
 sort=[<json_sort_object>,...] <4>
 ----
@@ -97,15 +97,16 @@ sort=[<json_sort_object>,...] <4>
 <3> Sort by a single property with a sort object
 <4> Sort by multiple properties with a list of sort objects
 
-`dir` is added to specify sort direction when sorting is done on a single property. It can have one of these values:
+`direction` is added to specify sort direction when sorting is done on a single property. It can have one of these values
+(specified in lower or upper case) :
 
-* `ASC`: this is also the default, when no `dir` is provided
-* `DESC`
-* `ASC_CI`: for case-insensitive ascending ordering
-* `DESC_CI`: for case-insensitive descending ordering
+* `asc`: this is also the default, when no `direction` is provided
+* `desc`
+* `asc_ci`: for case-insensitive ascending ordering
+* `desc_ci`: for case-insensitive descending ordering
 
 `<json_sort_object>` allows to specify both the property and the direction in one place and has a form of
-`{"property": .., "direction": .. }`. `direction` is optional and takes the same values as `dir`. Let's demonstrate
+`{"path": .., "direction": .. }`. `direction` is optional and takes the same values as `direction`. Let's demonstrate
 all the flavors with a few examples:
 
 .Example 1: Ascending sort by a single property
@@ -117,19 +118,19 @@ sort=name
 .Example 2: Descending sort by a single property with explicit direction
 [source]
 ----
-sort=id&dir=DESC
+sort=id&direction=desc
 ----
 
 .Example 3: Descending sort by a single property with a sort object
 [source]
 ----
-sort={"property":"id","direction":"DESC"}
+sort={"path":"id","direction":"desc"}
 ----
 
 .Example 4: Sort by multiple properties with a list of sort objects
 [source]
 ----
-sort=[{"property":"name"},{"property":"dateOfBirth","direction":"DESC"}]
+sort=[{"path":"name"},{"path":"dateOfBirth","direction":"desc"}]
 ----
 
 [#Pagination]

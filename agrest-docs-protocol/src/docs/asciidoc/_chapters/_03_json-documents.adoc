@@ -7,17 +7,12 @@ This document is used in response to POST, PUT or DELETE when no entity data is 
 [source,json]
 ----
 {
-   "success" : true,
    "message" : "..."
 }
 ----
 .Simple Response Document properties
 [cols="1,15,~"]
 |===
-|`success`
-|boolean
-|Whether the request was successful. This property is redundant and exists for legacy reasons only. It will be removed in
-the future. Client code should ignore it, and rely on the HTTP status code instead.
 |`message`
 |string
 |An optional human-readable message, usually provided to explain reasons of a failure.
