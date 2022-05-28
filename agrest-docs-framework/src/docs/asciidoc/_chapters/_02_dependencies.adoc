@@ -1,0 +1,14 @@
+== Dependencies
+
+Agrest provides a number of modules that are added as dependencies to your app. To give a Maven example, the first
+thing you would usually import is the BOM (a so-called "bill of materials") that will define the version of all the
+other modules.
+
+[source,xml,indent=0]
+----
+include::../../../../pom.xml[tag=bom]
+----
+
+Now you can include individual Agrest libraries in your projects without thinking about their version.
+
+

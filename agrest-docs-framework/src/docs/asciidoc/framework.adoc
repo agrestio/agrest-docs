@@ -3,6 +3,7 @@
 = Agrest Framework
 
 include::_chapters/_01_introduction.adoc[]
+include::_chapters/_02_dependencies.adoc[]
 include::_chapters/getting-started.adoc[]
 include::_chapters/writing-resource-endpoints.adoc[]
 include::_chapters/request-chains.adoc[]
