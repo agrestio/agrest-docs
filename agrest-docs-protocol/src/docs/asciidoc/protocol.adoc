@@ -1,5 +1,7 @@
 :agrest-header: _chapters/header.html
 
+_Protocol Version 1.1_
+
 = Agrest Protocol
 
 include::_chapters/overview.adoc[]
