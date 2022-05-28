@@ -1,0 +1,20 @@
+== Introduction
+
+Agrest provides a Java server framework for rapid development of RESTful data applications that are compatible with the
+link:../protocol[Agrest Protocol]. The framework core is fully independent of specific data sources and REST engines.
+Integrations with https://cayenne.apache.org/[Apache Cayenne ORM] and
+https://en.wikipedia.org/wiki/Jakarta_RESTful_Web_Services[JAX-RS] (Jakarta and the older JavaEE) are included
+out of the box, and a variety of custom backends can be integrated by the user.
+
+Agrest apps can be run on link:../getting-started/[Spring Boot], https://github.com/bootique/bootique-agrest[Bootique]
+or any other environment. The framework plays well with other parts of the application - Agrest REST endpoints can
+coexist with "regular" REST endpoints without a conflict.
+
+Agrest is model-driven, with customizable "schema" that describes request and response entities. Agrest integrates
+with Swagger to generate REST documentation in the widely-adopted https://swagger.io/specification/[OpenAPI 3] format.
+
+=== Java Version
+
+Java 11 or newer is required.
+
+
