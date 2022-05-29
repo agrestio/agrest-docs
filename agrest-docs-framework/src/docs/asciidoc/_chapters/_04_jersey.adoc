@@ -22,7 +22,7 @@ NOTE: Bootique Note: Bootique 2.x supports Jersey 2, while Bootique 3.x supports
 === Dependencies
 
 You may or may not need to explicitly import Jersey dependencies, depending on how you are planning to run it (see
-above). And you will need the following Agrest import:
+above). But you will need the following Agrest import:
 
 [source,xml,indent=0]
 ----

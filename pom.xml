@@ -26,7 +26,7 @@
         <jruby.version>9.2.20.1</jruby.version>
         <jsoup.version>1.14.3</jsoup.version>
 
-        <agrest.version>5.0-SNAPSHOT</agrest.version>
+        <agrest.version>5.0.M1-SNAPSHOT</agrest.version>
         <jersey3.version>3.0.3</jersey3.version>
     </properties>
 

@@ -9,14 +9,15 @@ public class AgrestJerseyApp extends ResourceConfig { // <1>
 
     public AgrestJerseyApp() {
 
-        AgRuntime agRuntime = AgRuntime // <2>
+        AgRuntime runtime = AgRuntime // <2>
                 .builder()
                 // add backend configurations and runtime extensions
                 // .module(...)
                 .build();
 
         // <3>
-        super.register(AgJaxrsFeature.builder().runtime(agRuntime).build());
+        AgJaxrsFeature agJaxRs = AgJaxrsFeature.build(runtime);
+        super.register(agJaxRs);
 
         // <4>
         super.register(AuthorApi.class);

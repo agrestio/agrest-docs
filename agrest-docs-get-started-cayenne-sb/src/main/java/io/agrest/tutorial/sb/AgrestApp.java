@@ -25,14 +25,17 @@ public class AgrestApp extends ResourceConfig { // <1>
     public AgrestApp() {
 
         // <2>
-        ServerRuntime cayenneRuntime = ServerRuntime.builder().addConfig("cayenne-project.xml").build();
+        ServerRuntime cayenneRuntime = ServerRuntime
+                .builder()
+                .addConfig("cayenne-project.xml")
+                .build();
 
         // <3>
         AgCayenneModule agCayenneBackend = AgCayenneBuilder.build(cayenneRuntime);
         AgRuntime agRuntime = AgRuntime.builder().module(agCayenneBackend).build();
 
         // <4>
-        AgJaxrsFeature agFeature = AgJaxrsFeature.builder().runtime(agRuntime).build();
+        AgJaxrsFeature agFeature = AgJaxrsFeature.build(agRuntime);
         register(agFeature);
 
         // <5>

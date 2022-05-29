@@ -16,4 +16,4 @@ public class MyModuleProvider implements AgModuleProvider {
         return MyModule.class;
     }
 }
-// tag::all[]
+// end::all[]

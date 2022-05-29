@@ -15,4 +15,4 @@ public class MyModule implements Module {
                 .put(MoneyConverter.class.getName(), MoneyConverter.class);
     }
 }
-// tag::all[]
+// end::all[]
