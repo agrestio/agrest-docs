@@ -25,7 +25,7 @@ NOTE: To see what kinds of services and extensions are available and how to use 
 check the source code of `io.agrest.runtime.AgCoreModule` on GitHub. This is the main module of Agrest, and defines the
 default behavior for the framework.
 
-=== Auto-loadable Modules
+=== Auto-Loadable Modules
 
 For more complex extensions, that are packaged in their own `.jar` files, Agrest provides an auto-loading mechanism,
 that ensures they are automatically merged into the runtime if present on the classpath. To turn your code into an
