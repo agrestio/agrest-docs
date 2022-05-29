@@ -1,6 +1,6 @@
 == JSON Documents
 
-=== Simple Response
+=== Message Response
 
 This document is used in response to POST, PUT or DELETE when no entity data is returned to the client.
 
@@ -10,7 +10,7 @@ This document is used in response to POST, PUT or DELETE when no entity data is 
    "message" : "..."
 }
 ----
-.Simple Response Document properties
+.Message Response Document properties
 [cols="1,15,~"]
 |===
 |`message`
@@ -20,8 +20,8 @@ This document is used in response to POST, PUT or DELETE when no entity data is 
 
 === Collection Response
 
-This document is used in response to GET, POST or PUT to return data from the server. This is the main representation
-of data in Agrest.
+This document is used in response to GET, POST or PUT to return data from the server. This is the format used to
+return any kind of data to the client.
 
 [source,json]
 ----

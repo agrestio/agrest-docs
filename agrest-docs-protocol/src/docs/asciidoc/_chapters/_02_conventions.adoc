@@ -5,7 +5,7 @@ than hard requirements, but following them would produce consistent, easy-to-und
 conventions for writing Agrest endpoints, some reflected in the default server framework, others left to the developer
 to follow:
 
-* Content type of GET, POST, PUT responses serving <<Simple Response,simple documents>> or
+* Content type of GET, POST, PUT responses serving <<Message Response,message documents>> or
 <<Collection Response,collection documents>> is `application/json`
 * Content type of POST and PUT requests consuming <<Update Request,update documents>> is `application/json`
 * Control parameters are passed as URL query parameters (e.g. `my?include=name`)
