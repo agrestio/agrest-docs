@@ -12,4 +12,6 @@ include::_chapters/_07_delete.adoc[]
 include::_chapters/_08_cayenne.adoc[]
 include::_chapters/_09_schema.adoc[]
 include::_chapters/_10_access_control.adoc[]
-include::_chapters/_11_swagger.adoc[]
+include::_chapters/_11_custom_stages.adoc[]
+include::_chapters/_12_swagger.adoc[]
+
