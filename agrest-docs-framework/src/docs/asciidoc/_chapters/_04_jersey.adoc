@@ -4,14 +4,16 @@ Jersey is the most common REST engine to run Agrest applications. Agrest support
 or the newer Jakarta-based Jersey 3 (via `agrest-jaxrs3`). Their main difference is the Java package naming (`javax.`
 vs `jakarta.`). We will provide examples from Jersey 3 here, but they should equally apply to Jersey 2.
 
-Jersey (until at least 3.1) doesn't run standalone and will require some kind of Java "server" (Jetty,
-Spring Boot, Bootique, etc.). Some examples of server integration are provided in the links below, and we will instead
-focus on Agrest usage for the rest of this document:
+Jersey doesn't run standalone until at least version 3.1, and will require some kind of Java "server", such as Jetty,
+Spring Boot, Bootique, etc. Examples of server integrations are provided in the links below:
 
 * https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest3x/index.html[Jersey 3 own docs]
 * link:../getting-started/[Spring Boot 2.x Agrest tutorial] (Jersey 2 only)
 * https://github.com/bootique/bootique-jersey[Bootique Jersey], or even better -
 https://github.com/bootique/bootique-agrest[Bootique Agrest]
+
+For the rest of this document we will focus on Agrest usage in the Jersey (or more broadly - JAX-RS) environment,
+independent of the underlying server.
 
 NOTE: SpringBoot: SpringBoot 2.x supports Jersey 2, while SpringBoot 3.x will support Jersey 3
 
