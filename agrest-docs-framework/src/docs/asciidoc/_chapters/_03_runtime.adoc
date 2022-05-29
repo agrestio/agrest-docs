@@ -3,37 +3,35 @@
 `AgRuntime` object is the core of Agrest. It provides the strategies to process various types of requests, stores
 the app data "schema", and serves as an integration point for various data backends. When working in the
 environments like <<Jersey Integration,Jersey / JAX-RS>>, you may not be interacting with `AgRuntime` directly, but it
-is still the object doing all the heavy lifting under the hood (and you will still need to assemble the runtime).
-
-`AgRuntime` internally uses a lightweight dependency-injection container to assemble its services, and can be extended
-using "modules", as we'll demonstrate shortly. Here is how you create a runtime:
+is still the object doing all the heavy lifting under the hood. And you will still need to assemble the runtime
+before you can use Agrest. Here is how you create the runtime:
 
 [source,java,indent=0]
 ----
 include::../../../main/java/io/agrest/docs/framework/AgRuntimeExample.java[tag=create]
 ----
 This was a bare-bone runtime. Usually you would add at least one backend provider (such as
-<<Cayenne Integration,Apache Cayenne>>), and sometimes - your own extensions. All extensions are added via
-custom "modules":
+<<Cayenne Integration,Apache Cayenne>>), and sometimes - your own extensions. Internally `AgRuntime` uses a lightweight
+dependency-injection container to assemble its services, and can be extended using "modules":
 
 [source,java,indent=0]
 ----
 include::../../../main/java/io/agrest/docs/framework/AgRuntimeExample.java[tag=create-with-converter]
 ----
 <1> Registering a module that adds support for a custom value type of `Money`, providing a converter for it to be read from
-JSON.
+JSON. `b` is a special `Binder` object that allows to define or override services in the DI environment.
 
-NOTE: To see what kinds of services and extensions are available, and how to use the Binder API within a module, you may
+NOTE: To see what kinds of services and extensions are available and how to use the Binder API, you may
 check the source code of `io.agrest.runtime.AgCoreModule` on GitHub. This is the main module of Agrest, and defines the
 default behavior for the framework.
 
 === Auto-loadable Modules
 
 For more complex extensions, that are packaged in their own `.jar` files, Agrest provides an auto-loading mechanism,
-that ensures they are automatically included in runtime if present on the classpath. To turn your code into an
+that ensures they are automatically merged into the runtime if present on the classpath. To turn your code into an
 auto-loadable module, add a file called `META-INF/services/io.agrest.AgModuleProvider` to the classpath of your project
 (usually under `src/main/resources`), with a single line that is a fully-qualified class name of the `AgModuleProvider`
-implementor. E.g. the same extension as above can be made auto-loadable as follows:
+implementor. E.g. the same extension as above can be rewritten to be auto-loadable:
 
 .META-INF/services/io.agrest.AgModuleProvider
 [source]
