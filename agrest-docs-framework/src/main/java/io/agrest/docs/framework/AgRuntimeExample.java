@@ -20,9 +20,9 @@ public class AgRuntimeExample extends ResourceConfig {
         // tag::create-with-converter[]
         AgRuntime agRuntime = AgRuntime
                 .builder()
-                .module(b -> b
+                .module(b -> b // <1>
                         .bindMap(JsonValueConverter.class)
-                        .put(MoneyConverter.class.getName(), MoneyConverter.class)) // <1>
+                        .put(MoneyConverter.class.getName(), MoneyConverter.class))
                 .build();
         // end::create-with-converter[]
     }
