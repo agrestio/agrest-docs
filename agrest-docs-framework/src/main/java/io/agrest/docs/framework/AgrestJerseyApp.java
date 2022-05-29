@@ -9,7 +9,8 @@ public class AgrestJerseyApp extends ResourceConfig { // <1>
 
     public AgrestJerseyApp() {
 
-        AgRuntime runtime = AgRuntime // <2>
+        // <2>
+        AgRuntime runtime = AgRuntime
                 .builder()
                 // add backend configurations and runtime extensions
                 // .module(...)

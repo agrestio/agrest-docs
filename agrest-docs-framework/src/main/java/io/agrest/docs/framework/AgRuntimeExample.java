@@ -11,7 +11,7 @@ public class AgRuntimeExample extends ResourceConfig {
     public void createRuntime() {
 
         // tag::create[]
-        AgRuntime agRuntime = AgRuntime.builder().build();
+        AgRuntime agRuntime = AgRuntime.build();
         // end::create[]
     }
 
