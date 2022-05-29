@@ -27,6 +27,7 @@
         <jsoup.version>1.14.3</jsoup.version>
 
         <agrest.version>5.0-SNAPSHOT</agrest.version>
+        <jersey3.version>3.0.3</jersey3.version>
     </properties>
 
     <repositories>

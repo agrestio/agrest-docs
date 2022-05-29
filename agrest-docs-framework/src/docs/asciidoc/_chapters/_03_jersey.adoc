@@ -1,6 +1,0 @@
-== Jersey 3 Integration
-
-The discussion of Agrest APIs only makes sense in a context of a specific REST engine. This document focuses describes
-integration with Jersey 3.
-
-

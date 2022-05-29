@@ -1,0 +1,49 @@
+== Jersey Integration
+
+Jersey is the most common REST engine to run Agrest applications. Agrest supports either Jersey 2 (via `agrest-jaxrs2`)
+or the newer Jakarta-based Jersey 3 (via `agrest-jaxrs3`). Their main difference is the Java package naming (`javax.`
+vs `jakarta.`). We will provide examples from Jersey 3 here, but they should equally apply to Jersey 2.
+
+Jersey (until at least 3.1) doesn't run standalone and will require some kind of Java "server" (Jetty,
+Spring Boot, Bootique, etc.). Some examples of server integration are provided in the links below, and we will instead
+focus on Agrest usage for the rest of this document:
+
+* https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest3x/index.html[Jersey 3 own docs]
+* link:../getting-started/[Spring Boot 2.x Agrest tutorial] (Jersey 2 only)
+* https://github.com/bootique/bootique-jersey[Bootique Jersey], or even better -
+https://github.com/bootique/bootique-agrest[Bootique Agrest]
+
+NOTE: SpringBoot: SpringBoot 2.x supports Jersey 2, while SpringBoot 3.x will support Jersey 3
+
+NOTE: Bootique Note: Bootique 2.x supports Jersey 2, while Bootique 3.x supports Jersey 2 and 3
+
+=== Dependencies
+
+You may or may not need to explicitly import Jersey dependencies, depending on how you are planning to run it (see
+above). And you will need the following Agrest import:
+
+[source,xml,indent=0]
+----
+include::../../../../pom.xml[tag=agrest-jaxrs3]
+----
+
+=== Jersey Bootstrap
+
+Jersey provides a convenience superclass called `ResourceConfig` that you can subclass and bootstrap your application
+in the constructor:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/AgrestJerseyApp.java[tag=all]
+----
+<1> The app class extending Jersey `ResourceConfig`
+<2> Create Agrest runtime, as described in the <<Runtime>> section
+<3> Register Agrest runtime with Jersey / JAX-RS environment
+<4> Register your app API endpoints with Jersey (we will see these endpoint classes shortly)
+
+=== Custom Extensions
+
+TODO: JAX-RS extensions via `AgFeatureProvider`
+
+
+

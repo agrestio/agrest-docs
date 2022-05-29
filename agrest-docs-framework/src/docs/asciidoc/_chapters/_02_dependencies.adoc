@@ -1,14 +1,17 @@
 == Dependencies
 
-Agrest provides a number of modules that are added as dependencies to your app. To give a Maven example, the first
-thing you would usually import is the BOM (a so-called "bill of materials") that will define the version of all the
-other modules.
+Before we can start writing Agrest apps, we need to include the modules that we need as dependencies. While the
+framework has many modules, the first step is usually to import the common BOM (a so-called "bill of
+materials") that will define the version of all the other modules. It is placed in the `<dependencyManagement/>`
+section of the `pom.xml`:
 
 [source,xml,indent=0]
 ----
 include::../../../../pom.xml[tag=bom]
 ----
+With this out of the way, we will show the use of individual Agrest modules in your projects without having to worry
+about their version.
 
-Now you can include individual Agrest libraries in your projects without thinking about their version.
-
+NOTE: While all the build examples are Maven-based, Agrest apps most certainly can be assembled with  Gradle
+or any other Java build tool you might prefer.
 
