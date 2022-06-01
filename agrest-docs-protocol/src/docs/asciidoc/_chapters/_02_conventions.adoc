@@ -8,7 +8,8 @@ to follow:
 * Content type of GET, POST, PUT responses serving <<Message Response,message documents>> or
 <<Collection Response,collection documents>> is `application/json`
 * Content type of POST and PUT requests consuming <<Update Request,update documents>> is `application/json`
-* Control parameters are passed as URL query parameters (e.g. `my?include=name`)
+* Control parameters are passed as URL query parameters (e.g. `/my?include=name`)
+* Values of control parameters may contain spaces, special chars and small chunks of JSON. So they need to be URL-encoded
 * Individual object ids are passed as URL path components (e.g. `/my/5`)
 * Standard HTTP status codes are used to convey either a success or a failure of a request
 * Dates and times in requests and responses are in https://en.wikipedia.org/wiki/ISO_8601[ISO 8601] format. E.g.

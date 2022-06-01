@@ -49,7 +49,7 @@ A few things to note about the examples above:
 * There is an implicit "root entity" to which the paths are applied. It is either the main entity of
 the request or, when an expression is used inside an `include`, a related entity. So `name` and `books.title` would work
 with `Author`, while `title` and `author.dateOfBirth` - with `Book`.
-* Parameters always start with a "$" sign, regardless whether they are resolved by name or by position
+* Parameters always start with a "$" sign, regardless of whether they are resolved by name or by position
 
 Here are a few examples using an expression key (not showing URL encoding):
 
