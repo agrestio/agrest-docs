@@ -1,0 +1,101 @@
+== Schema
+
+Internally Agrest maintains a metadata management service called `AgSchema` that stores models of application data
+objects, each represented as `AgEntity`. An entity has properties, that can be one of the following: `id`,
+`attribute`, `relationship`. They also provide data retrieval and access control strategies.
+
+Here is how you can access the schema, entities amd properties in runtime:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=schema]
+----
+<1> `AgSchema` object is a "service" within the Agrest runtime
+<2> `AgEntity` is a REST API model corresponding to a specific Java class
+<3> `AgAttribute` is one of the 3 property types in the entity model. Among other things it contains a "reader",
+i.e. resolution strategy.
+
+NOTE: As a developer, you'd rarely use `AgSchema` directly. But you need to define how the schema looks like for
+the benefit of Agrest runtime.
+
+NOTE: Even though schemas are usually associated with specific Java classes (such as `Book` or `Author`), they are not
+necessarily identical to the structure of those classes, as they represent the client view of the data. Some object
+properties may not be visible via REST API, others may be "virtual" and not exist in the object at
+all.
+
+As described later in this chapter, there are a few ways to initialize the schema of the Agrest runtime
+- <<Schema Annotations,via annotations>>, <<External Metadata,from other metadata>> (such as an ORM model) and also
+<<Entity Overlays,manually>>. These three approaches are complimentary and can be combined with each other.
+
+=== Schema Annotations
+
+`@AgId`, `@AgAttribute` and `@AgRelationship` annotations are used to define which object properties should be included
+in the default Agrest model. They are applied to "getter" methods of Java classes:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/model/Book.java[tag=all]
+----
+<1> Tags the property as an id
+<2> Tags the property as an attribute (i.e. the property that is a "value"). Read-only policy is defined.
+<3> Tags the property as a relationship (i.e. the property pointing to another entity)
+
+=== External Metadata
+
+With some Agrest backends an `AgSchema` can be auto-generated from a preexisting backend-specific schema. E.g.
+Apache Cayenne ORM backend automatically compiles `AgSchema` that directly corresponds to the Cayenne ORM model.
+Application can then customize it <<Schema Annotations,via annotations>>
+(e.g. `@AgAttribute(readable=false,writable=false)` allows to hide a certain property from the REST API),
+or via <<Entity Overlays,entity overlays>> discussed next, but the bulk of the schema is created without any explicit
+effort on the part of the developer.
+
+If you are writing your own backend integration, and there is a preexisting schema you'd like Agrest to use, you can
+implement your own "entity compiler":
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=schema-compiler]
+----
+<1> If the class should be handled by our custom backend, generate an `AgEntity` in some
+backend-specific way
+<2> If the class is not recognized, return null to give some other compiler a chance to provide the schema
+
+Here is how to register the compiler with Agrest runtime:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=schema-compiler-module]
+----
+
+=== Entity Overlays
+
+As the name implies, entity overlays are used to change the structure of the existing schema entities, that were compiled
+from annotations or via some other mechanism. Overlays is versatile mechanism frequently used in applications to tweak
+entity representations. E.g.:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=overlay]
+----
+<1> Adds a new calculated attribute called "age"
+<2> Adds a policy forbidding changing "dateOfBirth" attribute
+
+Overlays can be applied globally, affecting the entire runtime. Here they redefine the schema that was created
+from annotations or from external metadata:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=runtime-overlay]
+----
+Overlays can
+also be applied per-request:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=request-overlay]
+----
+This way dynamically-generated overlays can shape the entities based on some request data, such as user permissions.
+And indeed, per-request Agrest <<Access Control,access control>> methods are internally implemented as entity overlays.
+
+Another thing to notice here, is that overlay doesn't necessarily need to be of the same type as the root
+entity of the request. In the example above, the request is for `Book`, while overlay is for `Author`. So it will be applied in
+case the request contains `include=author` control parameter.
