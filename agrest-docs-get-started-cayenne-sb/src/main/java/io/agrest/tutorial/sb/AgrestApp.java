@@ -41,7 +41,10 @@ public class AgrestApp extends ResourceConfig { // <1>
                 .builder()
                 .module(AgCayenneModule.build(cayenneRuntime))
                 // end::app[]
-                .module(AgSwaggerModule.builder().entityPackage(Book.class.getPackage()).build()) // <1>
+                .module(AgSwaggerModule
+                        .builder()
+                        .entityPackage(Book.class.getPackage())
+                        .build()) // <1>
                 // tag::app[]
                 .build();
         // end::openapi-bootstrap[]
