@@ -41,5 +41,5 @@ UI for your API docs similar to the one in this screenshot:
 
 image::img/getting-started/swagger-ui.png[align="center"]
 
-You can make your model even more informative by annotating `BookApi` and `AuthorApi` with Swagger annotation
-(such as `@OpenAPIDefinition`, `@Operation`, etc.). We'll leave it as an exercise for the user.
+You can make your model even more informative by annotating `BookApi` and `AuthorApi` with Swagger annotations, such
+as `@OpenAPIDefinition`, `@Operation`, etc. We'll leave it as an exercise for the user.
