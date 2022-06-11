@@ -12,9 +12,9 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-// tag::all[]
+// tag::app[]
 @SpringBootApplication
-public class AgrestApp extends ResourceConfig { // <1>
+public class AgrestApp extends ResourceConfig {
 
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(AgrestApp.class);
@@ -24,23 +24,30 @@ public class AgrestApp extends ResourceConfig { // <1>
 
     public AgrestApp() {
 
-        // <2>
+        // app configuration goes here
+        // end::app[]
+
+        // tag::basebootstrap[]
+        // <1>
         ServerRuntime cayenneRuntime = ServerRuntime
                 .builder()
                 .addConfig("cayenne-project.xml")
                 .build();
 
-        // <3>
+        // <2>
         AgCayenneModule agCayenneBackend = AgCayenneBuilder.build(cayenneRuntime);
         AgRuntime agRuntime = AgRuntime.builder().module(agCayenneBackend).build();
 
-        // <4>
+        // <3>
         AgJaxrsFeature agFeature = AgJaxrsFeature.build(agRuntime);
         register(agFeature);
 
-        // <5>
+        // <4>
         register(AuthorApi.class);
         register(BookApi.class);
+        // end::basebootstrap[]
+
+        // tag::app[]
     }
 }
-// end::all[]
+// end::app[]

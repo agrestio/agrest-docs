@@ -40,15 +40,20 @@ application called `AgrestApp` with some bootstrap code:
 
 [source,java,indent=0]
 ----
-include::../../../main/java/io/agrest/tutorial/sb/AgrestApp.java[tag=all]
+include::../../../main/java/io/agrest/tutorial/sb/AgrestApp.java[tag=app]
 ----
-<1> Our app class extends `ResourceConfig` coming from Jersey (our JAX-RS provider). Jersey configuration normally
-happens in the `ResourceConfig` constructor (as described below), and the `ResourceConfig` is then automatically loaded
-by SpringBoot on startup.
-<2> Create Cayenne runtime
-<3> Create Agrest runtime with Cayenne backend
-<4> Register Agrest runtime with Jersey / JAX-RS environment
-<5> Register API endpoints with Jersey
+Our app class extends `ResourceConfig` provided by Jersey (our JAX-RS provider). Configuration happens in the
+constructor as described below. And the `ResourceConfig` subclass is automatically loaded by SpringBoot on startup. Here
+is what we should place in the constructor:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/tutorial/sb/AgrestApp.java[tag=basebootstrap]
+----
+<1> Create Cayenne runtime
+<2> Create Agrest runtime with Cayenne backend
+<3> Register Agrest runtime with Jersey / JAX-RS environment
+<4> Register API endpoints with Jersey
 
 === Run the App and Create Data
 
