@@ -41,5 +41,7 @@ model similar to the one in this screenshot:
 
 image::img/getting-started/swagger-ui.png[align="center"]
 
+
+
 NOTE: You can use Swagger annotations (such as `@OpenAPIDefinition`, `@Operation`, etc.) on `BookApi` and `AuthorApi`
 to provide extra information about the endpoints.
