@@ -44,21 +44,39 @@
     </dependencyManagement>
     <!-- end::bom[] -->
 
-    <!-- tag::agrest-dependencies[] -->
+    <!-- tag::app-dependencies[] -->
     <dependencies>
 
-        <!-- This adds Agrest integration for JAX-RS / Jersey 2  -->
+        <!-- Adds Agrest integration for JAX-RS / Jersey 2  -->
         <dependency>
             <groupId>io.agrest</groupId>
             <artifactId>agrest-jaxrs2</artifactId>
         </dependency>
 
-        <!-- This adds an Agrest DB backend based on Cayenne ORM -->
+        <!-- Adds an Agrest DB backend based on Cayenne ORM -->
         <dependency>
             <groupId>io.agrest</groupId>
             <artifactId>agrest-cayenne</artifactId>
         </dependency>
 
+        <!-- end::app-dependencies[] -->
+
+        <!-- tag::openapi-dependencies[] -->
+        <dependency>
+            <groupId>io.agrest</groupId>
+            <artifactId>agrest-jaxrs2-openapi</artifactId>
+        </dependency>
+        <!-- end::openapi-dependencies[] -->
+
+        <!-- tag::swagger-dependencies[] -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.9</version>
+        </dependency>
+        <!-- end::swagger-dependencies[] -->
+
+        <!-- tag::app-dependencies[] -->
         <!-- Spring Boot + Jersey -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,7 +89,7 @@
             <artifactId>derby</artifactId>
         </dependency>
     </dependencies>
-    <!-- end::agrest-dependencies[] -->
+    <!-- end::app-dependencies[] -->
 
     <build>
         <plugins>

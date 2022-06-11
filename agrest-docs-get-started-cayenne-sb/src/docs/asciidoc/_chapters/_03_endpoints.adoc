@@ -42,18 +42,12 @@ application called `AgrestApp` with some bootstrap code:
 ----
 include::../../../main/java/io/agrest/tutorial/sb/AgrestApp.java[tag=app]
 ----
-Our app class extends `ResourceConfig` provided by Jersey (our JAX-RS provider). Configuration happens in the
-constructor as described below. And the `ResourceConfig` subclass is automatically loaded by SpringBoot on startup. Here
-is what we should place in the constructor:
-
-[source,java,indent=0]
-----
-include::../../../main/java/io/agrest/tutorial/sb/AgrestApp.java[tag=basebootstrap]
-----
-<1> Create Cayenne runtime
-<2> Create Agrest runtime with Cayenne backend
-<3> Register Agrest runtime with Jersey / JAX-RS environment
-<4> Register API endpoints with Jersey
+<1> Our app class extends `ResourceConfig` provided by Jersey (our JAX-RS provider). Configuration happens in the
+constructor below. `ResourceConfig` subclass is automatically loaded by SpringBoot on startup.
+<2> Create Cayenne runtime
+<3> Create Agrest runtime with Cayenne backend
+<4> Register Agrest runtime with Jersey / JAX-RS environment
+<5> Register API endpoints with Jersey
 
 === Run the App and Create Data
 
@@ -64,7 +58,7 @@ Now we can run the main class in the IDE, and use `curl` or a similar HTTP clien
 curl -X POST -i \
   -d '{"name":"Ernest Hemingway","dateOfBirth":"1899-07-21"}' \
   -H 'Content-Type: application/json' \
-  http://localhost:8080/author
+  http://localhost:8080/api/author
 ----
 The response might look like this (note the id value, we'll need it to create Books) :
 
@@ -86,7 +80,7 @@ Now let's create a `Book`. In the following POST request, use the ID of the auth
 curl -X POST -i \
   -d '[{"title":"A Farewell to Arms","author":1},{"title":"For Whom the Bell Tolls","author":1}]' \
   -H 'Content-Type: application/json' \
-  http://localhost:8080/book
+  http://localhost:8080/api/book
 ----
 Since `BookApi` used `SimpleResponse`, the JSON returned will be just an acknowledgement of success:
 [source]
@@ -112,7 +106,7 @@ include::../../../main/java/io/agrest/tutorial/sb/api/BookApi.java[tag=get]
 Now you can restart the app, and run the  following request:
 [source,bash]
 ----
-curl http://localhost:8080/book
+curl http://localhost:8080/api/book
 ----
 
 [source,json]
@@ -131,7 +125,7 @@ pass various Agrest protocol keys in the URL, to filter the result, resolve rela
 Include Author in the response, and exclude ids:
 [source,bash]
 ----
-curl 'http://localhost:8080/book?exclude=id&include=author.name'
+curl 'http://localhost:8080/api/book?exclude=id&include=author.name'
 ----
 
 [source,json]
@@ -148,7 +142,7 @@ curl 'http://localhost:8080/book?exclude=id&include=author.name'
 Sort by title:
 [source,bash]
 ----
-curl 'http://localhost:8080/book?include=title&sort=title'
+curl 'http://localhost:8080/api/book?include=title&sort=title'
 ----
 
 [source,json]

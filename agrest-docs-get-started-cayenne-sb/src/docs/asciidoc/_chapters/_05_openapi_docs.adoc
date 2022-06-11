@@ -1,0 +1,44 @@
+== OpenAPI Documentation
+
+It is a good practice to document your APIs for the benefit of consumers. The most popular format for REST API
+documentation is https://swagger.io/specification/[OpenAPI 3]. Agrest integrates with the Swagger library to expose
+its endpoints as OpenAPI model. Let's include it in our tutorial.
+
+Start by adding `agrest-jaxrs2-openapi` dependency to the `pom.xml`:
+
+[source,xml,indent=0]
+----
+include::../../../../pom.xml[tag=openapi-dependencies]
+----
+
+Now add OpenAPI bootstrap code to `AgrestApp`:
+
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/tutorial/sb/AgrestApp.java[tag=openapi-bootstrap]
+----
+<1> Adding this line to `AgRuntime` builder would indicate to Swagger that the API model for both Book and Author
+entities should be taken from Agrest instead of using reflection on the Java classes.
+<2> Add Swagger endpoint to the app.
+
+Now you can restart the application and go to http://127.0.0.1:8080/api/openapi.json . You will see the app model in
+JSON format, including all the Agrest query parameters.
+
+The next step is to add a Swagger UI browser for visual exploration of the documentation. We will use a Swagger
+intergation library from https://springdoc.org/ . Let's add it as a dependency:
+[source,xml,indent=0]
+----
+include::../../../../pom.xml[tag=swagger-dependencies]
+----
+and now create `src/main/resources/application.properties` and add configuration entry to it:
+[source,indent=0]
+----
+include::../../../main/resources/application.properties[]
+----
+Restart the application and go to 127.0.0.1:8080/swagger-ui.html . You should see Swagger UI for your model:
+
+image::img/getting-started/swagger-ui.png[align="center"]
+
+NOTE: You can use Swagger annotations (such as `@OpenAPIDefinition`, `@Operation`, etc.) on `BookApi` and `AuthorApi`
+to provide extra information about the endpoints.

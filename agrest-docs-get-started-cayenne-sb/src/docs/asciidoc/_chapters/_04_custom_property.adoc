@@ -19,7 +19,7 @@ Now let's restart the app, and run the following request for books with authors 
 
 [source,bash]
 ----
-curl 'http://localhost:8080/book?exclude=id&include=author.name&include=author.age'
+curl 'http://localhost:8080/api/book?exclude=id&include=author.name&include=author.age'
 ----
 
 [source,json]
@@ -35,3 +35,4 @@ curl 'http://localhost:8080/book?exclude=id&include=author.name&include=author.a
 
 We can see that as of this writing, Hemingway was 122 years old. `@AgAttribute` on getters is not the only
 way to add custom properties, bit it is very handy for simple calculated properties like our example.
+

@@ -19,6 +19,7 @@ include::_chapters/_01_project_setup.adoc[]
 include::_chapters/_02_cayenne_mapping.adoc[]
 include::_chapters/_03_endpoints.adoc[]
 include::_chapters/_04_custom_property.adoc[]
+include::_chapters/_05_openapi_docs.adoc[]
 
 == Conclusion
 
