@@ -18,7 +18,7 @@ Now add OpenAPI bootstrap code to `AgrestApp`:
 ----
 include::../../../main/java/io/agrest/tutorial/sb/AgrestApp.java[tag=openapi-bootstrap]
 ----
-<1> Adding this line to `AgRuntime` builder would indicate to Swagger that the API model for both Book and Author
+<1> Adding this configuration to `AgRuntime` builder would indicate to Swagger that the API model for both Book and Author
 entities should be taken from Agrest instead of using reflection on the Java classes.
 <2> Add Swagger endpoint to the app.
 
@@ -26,7 +26,7 @@ Now you can restart the application and go to http://127.0.0.1:8080/api/openapi.
 app model in JSON format, including all the Agrest query parameters.
 
 The next step is to add a Swagger UI browser for visual exploration of the documentation. We will use a Swagger
-intergation library from https://springdoc.org/ . Let's add it as a dependency:
+integration library from https://springdoc.org/ . Let's add it as a dependency:
 [source,xml,indent=0]
 ----
 include::../../../../pom.xml[tag=swagger-dependencies]
