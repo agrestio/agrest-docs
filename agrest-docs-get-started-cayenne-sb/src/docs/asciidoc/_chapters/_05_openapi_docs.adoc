@@ -31,7 +31,7 @@ intergation library from https://springdoc.org/ . Let's add it as a dependency:
 ----
 include::../../../../pom.xml[tag=swagger-dependencies]
 ----
-and now create `src/main/resources/application.properties` and add configuration entry to it:
+And now create `src/main/resources/application.properties` file and add the following configuration entry in it:
 [source,indent=0]
 ----
 include::../../../main/resources/application.properties[]
