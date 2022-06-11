@@ -36,7 +36,8 @@ And now create `src/main/resources/application.properties` file and add the foll
 ----
 include::../../../main/resources/application.properties[]
 ----
-Restart the application and go to http://127.0.0.1:8080/swagger-ui.html . You should see Swagger UI for your model:
+Restart the application and go to http://127.0.0.1:8080/swagger-ui.html . You should see the navigable UI for your
+model similar to the one in this screenshot:
 
 image::img/getting-started/swagger-ui.png[align="center"]
 
