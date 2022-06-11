@@ -22,8 +22,8 @@ include::../../../main/java/io/agrest/tutorial/sb/AgrestApp.java[tag=openapi-boo
 entities should be taken from Agrest instead of using reflection on the Java classes.
 <2> Add Swagger endpoint to the app.
 
-Now you can restart the application and go to http://127.0.0.1:8080/api/openapi.json . You will see the app model in
-JSON format, including all the Agrest query parameters.
+Now you can restart the application and go to http://127.0.0.1:8080/api/openapi.json in the browser. You will see the
+app model in JSON format, including all the Agrest query parameters.
 
 The next step is to add a Swagger UI browser for visual exploration of the documentation. We will use a Swagger
 intergation library from https://springdoc.org/ . Let's add it as a dependency:
@@ -36,8 +36,8 @@ And now create `src/main/resources/application.properties` file and add the foll
 ----
 include::../../../main/resources/application.properties[]
 ----
-Restart the application and go to http://127.0.0.1:8080/swagger-ui.html . You should see the navigable UI for your
-API docs similar to the one in this screenshot:
+Restart the application and open http://127.0.0.1:8080/swagger-ui.html in the browser You should see the navigable
+UI for your API docs similar to the one in this screenshot:
 
 image::img/getting-started/swagger-ui.png[align="center"]
 
