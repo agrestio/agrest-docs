@@ -31,7 +31,7 @@ For more complex extensions, that are packaged in their own `.jar` files, Agrest
 that ensures they are automatically merged into the runtime if present on the classpath.
 
 NOTE: You may not be using this often in your own code, as it is much easier to create inline modules when assembling
-the runtime. But this is the mechanism used by all the Agrest extensions.
+the runtime. But this is a useful mechanism for creating Agrest extensions.
 
 To turn your code into an
 auto-loadable module, add a file called `META-INF/services/io.agrest.AgModuleProvider` to the classpath of your project

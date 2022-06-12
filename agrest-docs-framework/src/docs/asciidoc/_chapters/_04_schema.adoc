@@ -1,10 +1,9 @@
 == Schema
 
-Internally Agrest maintains a metadata management service called `AgSchema` that stores models of application data
-objects, each represented as `AgEntity`. An entity has properties, that can be one of the following: `id`,
-`attribute`, `relationship`. They also provide data retrieval and access control strategies.
-
-Here is how you can access the schema, entities amd properties in runtime:
+Agrest has a metadata management service called `AgSchema` with access to models of app data
+objects, each represented by an `AgEntity` instance. Each entity contains properties. Those can be one of the following
+types: `id`, `attribute`, `relationship`. Entities also define data retrieval and access control strategies. Here is
+how you can obtain `AgSchema`, entities and properties in runtime:
 
 [source,java,indent=0]
 ----
@@ -15,17 +14,16 @@ include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=schema]
 <3> `AgAttribute` is one of the 3 property types in the entity model. Among other things it contains a "reader",
 i.e. resolution strategy.
 
-NOTE: As a developer, you'd rarely use `AgSchema` directly. But you need to define how the schema looks like for
-the benefit of Agrest runtime.
+NOTE: As a developer, you'd rarely use `AgSchema` directly. But you still need to define how the schema looks like for
+the benefit of Agrest runtime. More on this below.
 
 NOTE: Even though schemas are usually associated with specific Java classes (such as `Book` or `Author`), they are not
 necessarily identical to the structure of those classes, as they represent the client view of the data. Some object
-properties may not be visible via REST API, others may be "virtual" and not exist in the object at
-all.
+properties may be excluded from the REST API, others may be "virtual" and have no match in the object itself.
 
-As described later in this chapter, there are a few ways to initialize the schema of the Agrest runtime
-- <<Schema Annotations,via annotations>>, <<External Metadata,from other metadata>> (such as an ORM model) and also
-<<Entity Overlays,manually>>. These three approaches are complimentary and can be combined with each other.
+Let's looks at the various ways to define the schema in the app. Those are <<Schema Annotations,Ag annotations>>,
+<<External Metadata,external metadata>> and <<Entity Overlays,entity overlays>>. These three approaches are
+complimentary and can be combined with each other.
 
 === Schema Annotations
 
@@ -68,9 +66,10 @@ include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=schema-comp
 
 === Entity Overlays
 
-As the name implies, entity overlays are used to change the structure of the existing schema entities, that were compiled
-from annotations or via some other mechanism. Overlays is versatile mechanism frequently used in applications to tweak
-entity representations. E.g.:
+Entity overlays is a manual way to tweak the entities in the schema. As the name implies, overlays are used to
+change the structure of the existing entities, that were compiled from annotations or via some other mechanism.
+Overlays is a somewhat verbose, but rather versatile mechanism frequently used in applications. Here is an example of
+an overlay:
 
 [source,java,indent=0]
 ----
@@ -96,6 +95,6 @@ include::../../../main/java/io/agrest/docs/framework/Schema.java[tag=request-ove
 This way dynamically-generated overlays can shape the entities based on some request data, such as user permissions.
 And indeed, per-request Agrest <<Access Control,access control>> methods are internally implemented as entity overlays.
 
-Another thing to notice here, is that overlay doesn't necessarily need to be of the same type as the root
+Another thing to notice here, is that overlay doesn't need to be of the same type as the root
 entity of the request. In the example above, the request is for `Book`, while overlay is for `Author`. So it will be applied in
 case the request contains `include=author` control parameter.
