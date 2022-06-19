@@ -1,3 +1,3 @@
-== PUT requests
+== PUT Requests
 
 

@@ -1,9 +1,9 @@
 == Schema
 
 Agrest has a metadata management service called `AgSchema` with access to models of app data
-objects, each represented by an `AgEntity` instance. Each entity contains properties. Those can be one of the following
-types: `id`, `attribute`, `relationship`. Entities also define data retrieval and access control strategies. Here is
-how you can obtain `AgSchema`, entities and properties in runtime:
+objects, each represented by an `AgEntity` instance. Each entity contains properties. Those can be one of `id`,
+`attribute` or `relationship`. Entity and property models define names, data types and data retrieval and access control
+strategies. Here is how you can obtain an `AgSchema` singleton, entities and properties in runtime:
 
 [source,java,indent=0]
 ----
@@ -40,7 +40,7 @@ include::../../../main/java/io/agrest/docs/framework/model/Book.java[tag=all]
 
 === External Metadata
 
-With some Agrest backends an `AgSchema` can be auto-generated from a preexisting backend-specific schema. E.g.
+With some Agrest backends, an `AgSchema` can be auto-generated from another preexisting backend-provided schema. E.g.
 Apache Cayenne ORM backend automatically compiles `AgSchema` that directly corresponds to the Cayenne ORM model.
 Application can then customize it <<Schema Annotations,via annotations>>
 (e.g. `@AgAttribute(readable=false,writable=false)` allows to hide a certain property from the REST API),

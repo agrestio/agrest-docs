@@ -1,4 +1,6 @@
-== GET requests
+== GET Requests
+
+
 
 === Server-Side Request Shaping
 
