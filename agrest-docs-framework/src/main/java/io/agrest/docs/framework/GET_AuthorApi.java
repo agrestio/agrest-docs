@@ -2,6 +2,7 @@ package io.agrest.docs.framework;
 
 import io.agrest.AgRequest;
 import io.agrest.DataResponse;
+import io.agrest.SelectBuilder;
 import io.agrest.docs.framework.model.Author;
 import io.agrest.docs.framework.model.Book;
 import io.agrest.jaxrs3.AgJaxrs;
@@ -109,20 +110,63 @@ public class GET_AuthorApi {
     // tag::get_with_overlay[]
     @GET
     public DataResponse<Author> getWithOverlay(@Context UriInfo uri) {
-        AgEntityOverlay<Book> bookModelChanges = AgEntity.overlay(Book.class);
+
+        SelectBuilder<Author> builder = AgJaxrs
+                .select(Author.class, config)
+                .clientParams(uri.getQueryParameters());
 
         if (!isAdminRole()) {  // <1>
-            bookModelChanges.readablePropFilter(b -> b.property("copiesSold", false));
+
+            AgEntityOverlay<Book> bookModelChanges = AgEntity
+                    .overlay(Book.class)
+                    .readablePropFilter(b -> b.property("copiesSold", false));
+
+            builder.entityOverlay(bookModelChanges); // <2>
         }
 
-        return AgJaxrs.select(Author.class, config)
-                .clientParams(uri.getQueryParameters())
-                .entityOverlay(bookModelChanges) // <2>
-                .get();
+        return builder.get();
     }
     // end::get_with_overlay[]
 
+    // tag::get_with_prop_filter[]
+    @GET
+    public DataResponse<Author> getWithPropFilter(@Context UriInfo uri) {
+
+        SelectBuilder<Author> builder = AgJaxrs
+                .select(Author.class, config)
+                .clientParams(uri.getQueryParameters());
+
+        if (!isAdminRole()) {
+            builder.propFilter(Book.class, pfb -> pfb.property("copiesSold", false)); // <1>
+        }
+
+        return builder.get();
+    }
+    // end::get_with_prop_filter[]
+
+    // tag::get_with_read_filter[]
+    @GET
+    public DataResponse<Author> getWithReadFilter(@Context UriInfo uri) {
+
+        SelectBuilder<Author> builder = AgJaxrs
+                .select(Author.class, config)
+                .clientParams(uri.getQueryParameters());
+
+        if (isModernAuthorsOnly()) {
+            LocalDate threshold = LocalDate.of(1970, 1, 1);
+            builder.filter(Author.class, a -> a.getDateOfBirth().isAfter(threshold) ); // <1>
+        }
+
+        return builder.get();
+    }
+    // end::get_with_read_filter[]
+
+
     private boolean isAdminRole() {
+        return false;
+    }
+
+    private boolean isModernAuthorsOnly() {
         return false;
     }
 }

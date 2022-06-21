@@ -14,8 +14,7 @@ The framework will process those that are defined in the Agrest protocol (`exp`,
 
 === GET a Single Object
 
-In the example above we returned a collection of objects in the form of `DataResponse`. Often REST API would only
-return a single object for a given `id`. Here is how to implement this in Agrest:
+Often a REST API would only return a single object matching a given `id`. Here is how this can be implemented in Agrest:
 
 [source,java,indent=0]
 ----
@@ -30,8 +29,8 @@ more than one object is found (this will result in `500` status code).
 
 === GET Object Children
 
-Another  common pattern in the REST API design is retrieving "children" of a given "parent" object. E.g. the books of
-a single known author:
+Another common pattern in a REST API design is hierarchical resource URLs used to retrieve "children" of a given
+"parent" object. E.g. the books of a single known author:
 
 [source,java,indent=0]
 ----
@@ -42,8 +41,8 @@ include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_
 <2> Capture author ID as a `@PathParam`
 <3> Set the "parent" object of the request
 
-NOTE: This is pure syntactic sugar for "pretty" URLs like `/author/576/books`. Similar functionality can be implemented
-as `/book?exp=author=576` or `/author/576?include=books`.
+NOTE: "Parent" API is just syntactic sugar to support hierarchical resource URLs like `/author/576/books`. Similar
+functionality can also be implemented as `/book?exp=author=576` or `/author/576?include=books`.
 
 === Explicit Protocol Parameters
 Not every endpoint has to support every single protocol parameter. Depending on the application needs (and backend
@@ -58,11 +57,11 @@ include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_
 <2> Build a `AgRequest` object with all the passed parameters
 <3> Pass the `AgRequest` to the operation builder
 
-=== Server-side Protocol Parameter
+=== Server-Side Protocol Parameters
 
 The `AgRequest` object has another useful property. Unlike `UriInfo` that captures everything that was passed in the
-URL by the client, it is manually constructed *on the server*. So you can emulate parts of the Agrest protocol
-in your application code to limit what the client can do or to define the default data appearance, such as ordering:
+URL by the client, it is manually constructed *on the server*. So you can amend the request object in your application
+code to limit what the client can do or to define the default data appearance:
 
 [source,java,indent=0]
 ----
@@ -74,9 +73,9 @@ the dataset further by using the URL `exp` parameter (see the next item)
 <2> Combine the server-side expression with a client expression that came from the URL
 <3> Define data ordering (and do not allow the client to change it)
 
-=== Customizing Request Entities
+=== Customizing Entities
 
-As already mentioned in the chapter on <<Entity Overlays,Entity Overlays>>, you can redefine the shape of the entities,
+As already mentioned in the chapter on <<Entity Overlays,Entity Overlays>>, you can redefine the shape of entities,
 their retrieval strategies and access rules via per-request overlays:
 
 [source,java,indent=0]
@@ -84,11 +83,40 @@ their retrieval strategies and access rules via per-request overlays:
 include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_with_overlay]
 ----
 
-<1> Conditionally define that some attributes are only visible to the app administrators
-<2> Attach overlay to the request
+<1> Hide an attribute using an overlay if the request user is not an administrator
+<2> Apply the overlay to the request
 
 NOTE: While the request is for the `Author` entity, overlays can be for any entity at all (including the `Author`). In our
 case the overlay is for the `Book`, meaning that it will be applied if the user runs a request like `/author?include=books`
 
-=== Access Control
+=== Property Visibility
+
+There's a more direct API to implement per-request property visibility rules. Internally it is implemented as an overlay,
+similar to the previous example, but is less verbose for the user. It can also be applied to any entity, not just the
+root request entity:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_with_prop_filter]
+----
+
+<1> Apply "property filter" for non-admin users to the Book entity, hiding "copiesSold" property from the response objects
+
+=== Object Visibility
+
+The previous examples shows how you can hide certain entity properties based on per-request custom logic. Similarly,
+you can exclude certain _objects_ from the response based on some rules using the `ReadFilter` API:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_with_read_filter]
+----
+
+<1> If only modern authors are requested, apply a special "read filter". The filter method must return "true" for
+those objects that pass the check and should be included in the response.
+
+NOTE: If custom object filtering rules can be written as an `Exp` on the root entity, consider doing that instead of
+using a `ReadFilter`. It would move the filtering logic to the data store and out of your code, potentially
+optimizing the processing. You can refer to an example above from the <<Server-Side Protocol Parameters>> chapter.
+
 

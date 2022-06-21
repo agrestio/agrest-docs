@@ -9,6 +9,7 @@ public class Book {
 
     private long id;
     private String title;
+    private String publishStatus;
     private Author author;
 
     @AgId // <1>
@@ -38,6 +39,11 @@ public class Book {
 
     public Book setAuthor(Author author) {
         this.author = author;
+        return this;
+    }
+
+    public Book setPublishStatus(String publishStatus) {
+        this.publishStatus = publishStatus;
         return this;
     }
 }
