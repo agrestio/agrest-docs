@@ -1,6 +1,94 @@
 == GET Requests
 
+Here is how you may program a GET request handler:
 
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_all_params]
+----
 
-=== Server-Side Request Shaping
+<1> Start "select" operation builder
+<2> Pass all request parameters from JAX-RS `UriInfo` object
+The framework will process those that are defined in the Agrest protocol (`exp`, `include`, etc.) and ignore the rest
+<3> Execute the select operation
+
+=== GET a Single Object
+
+In the example above we returned a collection of objects in the form of `DataResponse`. Often REST API would only
+return a single object for a given `id`. Here is how to implement this in Agrest:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_by_id]
+----
+
+<1> "id" may be modeled as a part of the URL path and injected via JAX-RS `@PathParam`
+<2> Here is how the "id" is passed to the Agrest operation builder
+<3> Instead of `get()`, call `getOne()` to execute the operation. It still returns the same `DataResponse`, but
+will handle cases when there is no matching object found (`404` response status code instead of `200`) and also when
+more than one object is found (this will result in `500` status code).
+
+=== GET Object Children
+
+Another  common pattern in the REST API design is retrieving "children" of a given "parent" object. E.g. the books of
+a single known author:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_for_author]
+----
+
+<1> Define a URL path with author ID and relationship name
+<2> Capture author ID as a `@PathParam`
+<3> Set the "parent" object of the request
+
+NOTE: This is pure syntactic sugar for "pretty" URLs like `/author/576/books`. Similar functionality can be implemented
+as `/book?exp=author=576` or `/author/576?include=books`.
+
+=== Explicit Protocol Parameters
+Not every endpoint has to support every single protocol parameter. Depending on the application needs (and backend
+capabilities), you may explicitly define which parameters are supported:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_include_sort]
+----
+
+<1> Instead of `UriInfo`, capture individual query parameters using `@QueryParam` annotation
+<2> Build a `AgRequest` object with all the passed parameters
+<3> Pass the `AgRequest` to the operation builder
+
+=== Server-side Protocol Parameter
+
+The `AgRequest` object has another useful property. Unlike `UriInfo` that captures everything that was passed in the
+URL by the client, it is manually constructed *on the server*. So you can emulate parts of the Agrest protocol
+in your application code to limit what the client can do or to define the default data appearance, such as ordering:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_server_side_rules]
+----
+
+<1> Pass an expression limiting the dataset. The client will not be able to override this filter, and can only narrow
+the dataset further by using the URL `exp` parameter (see the next item)
+<2> Combine the server-side expression with a client expression that came from the URL
+<3> Define data ordering (and do not allow the client to change it)
+
+=== Customizing Request Entities
+
+As already mentioned in the chapter on <<Entity Overlays,Entity Overlays>>, you can redefine the shape of the entities,
+their retrieval strategies and access rules via per-request overlays:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_with_overlay]
+----
+
+<1> Conditionally define that some attributes are only visible to the app administrators
+<2> Attach overlay to the request
+
+NOTE: While the request is for the `Author` entity, overlays can be for any entity at all (including the `Author`). In our
+case the overlay is for the `Book`, meaning that it will be applied if the user runs a request like `/author?include=books`
+
+=== Access Control
 

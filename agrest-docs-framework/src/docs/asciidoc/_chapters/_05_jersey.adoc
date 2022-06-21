@@ -2,8 +2,8 @@
 
 Jersey is often used to run Agrest applications. It supports Java API for RESTful services (JAX-RS).
 Agrest works with either the legacy Jersey 2 (`agrest-jaxrs2` module) or the Jakarta-based Jersey 3 (`agrest-jaxrs3` module).
-Their main difference is JAX-RS package names (`javax.` vs `jakarta.`). We will provide Jersey 3 examples here, but
-they should equally apply to Jersey 2.
+Their main difference is JAX-RS package names (`javax.` vs `jakarta.`). We will provide Jersey 3 examples below, but
+they should equally apply to Jersey 2, and for the most part work with other JAX-RS servers.
 
 Jersey doesn't run standalone until at least version 3.1, and requires some kind of Java "server", such as Jetty,
 Spring Boot, Bootique, etc. Examples of server integrations are provided in the links below:
