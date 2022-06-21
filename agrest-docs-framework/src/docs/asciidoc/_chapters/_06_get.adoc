@@ -1,5 +1,6 @@
 == GET Requests
 
+With just a few lines of code, Agrest can process "GET" requests containing link:../protocol[Agrest protocol parameters].
 Here is how you may program a GET request handler:
 
 [source,java,indent=0]
@@ -8,8 +9,8 @@ include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_
 ----
 
 <1> Start "select" operation builder
-<2> Pass all request parameters from JAX-RS `UriInfo` object
-The framework will process those that are defined in the Agrest protocol (`exp`, `include`, etc.) and ignore the rest
+<2> Pass all request parameters from JAX-RS `UriInfo` object. The framework will process those that are defined in the
+Agrest protocol (`exp`, `include`, etc.) and ignore the rest
 <3> Execute the select operation
 
 === GET a Single Object
