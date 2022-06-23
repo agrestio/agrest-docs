@@ -22,8 +22,9 @@ public class AuthorApi {
     private Configuration config; // <1>
 
     @GET
-    public DataResponse<Author> get(@Context UriInfo uri) {
-        return AgJaxrs.select(Author.class, config) // <2>
+    public DataResponse<Author> get(@Context UriInfo uri) { // <2>
+        return AgJaxrs
+                .select(Author.class, config) // <3>
                 .clientParams(uri.getQueryParameters())
                 .get();
     }

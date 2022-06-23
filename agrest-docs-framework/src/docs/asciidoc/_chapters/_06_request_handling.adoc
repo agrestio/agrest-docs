@@ -1,0 +1,62 @@
+== Handling Requests
+
+Agrest runtime provides handlers for the various types of HTTP requests (<<GET Requests,GET>>, <<POST Requests,POST>>,
+<<PUT Requests,PUT>>, <<DELETE Requests,DELETE>>). We will discuss each
+one individually in the following chapters. Here we'll look at general principles of request handling. Below is a
+typical JAX-RS endpoint implemented with Agrest:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/AuthorApi.java[tag=all]
+----
+<1> JAX-RS `Configuration` is injected using JAX-RS `@Context` annotation
+<2> One way to collect protocol parameters for the request is via JAX-RS `UriInfo` injection
+<3> `AgJaxrs` is a helper that locates the `AgRuntime` within the `Configuration` and starts an Agrest processor
+
+NOTE: Agrest tries to stay maximally non-invasive within the app. You can mix Agrest endpoints with non-Agrest
+endpoints, and even within the endpoint you can execute any custom code.
+
+=== Handler Flavors
+
+Requests are handled by starting a request-appropriate builder via `AgJaxrs`, which is then configured with client
+request parameters, client body, custom entity schemas, access rules, etc., and then executed. Below are the main types
+of handlers:
+
+_Select handler._ Returns `DataResponse<T>` object:
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/RequestHandlersExample.java[tag=select]
+----
+_"Simple" update handler._ Creates and/or updates data, returning `SimpleResponse`. `create` handler is shown
+in this example:
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/RequestHandlersExample.java[tag=create]
+----
+
+NOTE: Updating handlers have a variety of flavors for idempotent and non-idempotent requests. We'll discuss them in the
+chapters on <<POST Requests,POST>> and <<PUT Requests,PUT>> requests.
+
+_"Selecting" update handler._ Creates and/or updates data, returning `DataResponse<T>` with the objects
+that where modified. It is identical to the "simple" handler, except you'd call `syncAndSelect` at the end
+instead of `sync`:
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/RequestHandlersExample.java[tag=create_with_data]
+----
+
+_Unrelate handler._ Breaks a relationship between entities:
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/RequestHandlersExample.java[tag=unrelate]
+----
+
+_Delete handler_:
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/RequestHandlersExample.java[tag=delete]
+----
+
+=== Handlers with Custom Stages
+
+TODO...

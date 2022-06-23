@@ -12,17 +12,17 @@ include::_chapters/_04_schema.adoc[]
 
 include::_chapters/_05_jersey.adoc[]
 
-include::_chapters/_06_get.adoc[]
+include::_chapters/_06_request_handling.adoc[]
 
-include::_chapters/_07_post.adoc[]
+include::_chapters/_07_get.adoc[]
 
-include::_chapters/_08_put.adoc[]
+include::_chapters/_08_post.adoc[]
 
-include::_chapters/_09_delete.adoc[]
+include::_chapters/_09_put.adoc[]
 
-include::_chapters/_10_cayenne.adoc[]
+include::_chapters/_10_delete.adoc[]
 
-include::_chapters/_11_custom_stages.adoc[]
+include::_chapters/_11_cayenne.adoc[]
 
 include::_chapters/_12_swagger.adoc[]
 

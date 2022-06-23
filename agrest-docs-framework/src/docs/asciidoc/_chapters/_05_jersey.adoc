@@ -46,19 +46,3 @@ include::../../../main/java/io/agrest/docs/framework/AgrestJerseyApp.java[tag=al
 === Custom Extensions
 
 TODO: JAX-RS extensions via `AgFeatureProvider`
-
-=== Agrest  Endpoints
-
-Below is a typical JAX-RS endpoint that invokes Agrest. We'll talk more about request processing in the following
-chapters. Here we'll just show how to access Agrest runtime from within JAX-RS:
-
-[source,java,indent=0]
-----
-include::../../../main/java/io/agrest/docs/framework/AuthorApi.java[tag=all]
-----
-<1> JAX-RS `Configuration` is injected using JAX-RS `@Context` annotation
-<2> `AgJaxrs` is a helper that locates the `AgRuntime` within `Configuration` and starts a request-specific Agrest
-processor
-
-NOTE: Agrest tries to stay maximally non-invasive. You can mix Agrest endpoints with non-Agrest endpoints, and even
-within the endpoint you can execute any custom code.

@@ -1,7 +1,7 @@
 == GET Requests
 
-With just a few lines of code, Agrest can process "GET" requests containing link:../protocol[Agrest protocol parameters].
-Here is how you may program a GET request handler:
+With just a few lines of code, Agrest can process `GET` requests conforming to
+link:../protocol#control-parameters[Agrest protocol]. Here is how you may program a request handler:
 
 [source,java,indent=0]
 ----
