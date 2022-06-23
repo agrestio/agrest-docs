@@ -2,8 +2,9 @@
 
 Agrest runtime provides handlers for the various types of HTTP requests (<<GET Requests,GET>>, <<POST Requests,POST>>,
 <<PUT Requests,PUT>>, <<DELETE Requests,DELETE>>). We will discuss each
-one individually in the following chapters. Here we'll look at general principles of request handling. Below is a
-typical JAX-RS endpoint implemented with Agrest:
+one individually in the following chapters. Here we'll look at general principles of request handling.
+
+Below is a typical JAX-RS endpoint implemented with Agrest:
 
 [source,java,indent=0]
 ----
