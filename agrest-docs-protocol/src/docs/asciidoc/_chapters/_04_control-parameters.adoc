@@ -51,7 +51,7 @@ the request or, when an expression is used inside an `include`, a related entity
 with `Author`, while `title` and `author.dateOfBirth` - with `Book`.
 * Parameters always start with a "$" sign, regardless of whether they are resolved by name or by position
 
-Here are a few examples using an expression key (not showing URL encoding):
+Here are a few examples using an expression parameter. URL encoding is not shown for clarity:
 
 .Example 1: Filtering on a single property
 [source]
