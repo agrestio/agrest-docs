@@ -80,9 +80,9 @@ exp=["author.dateOfBirth > $afterDate","1900-01-01"]
 exp={"exp":"author.dateOfBirth > $afterDate", "params":{"afterDate":"1900-01-01" }}
 ----
 
-=== sort / dir
+=== sort / direction
 
-`sort` and `dir` are used to order objects in the response collection. The following forms are supported:
+`sort` and `direction` are used to order objects in the response collection. The following forms are supported:
 
 [source]
 ----
