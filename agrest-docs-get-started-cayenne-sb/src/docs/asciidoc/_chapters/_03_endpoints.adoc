@@ -92,7 +92,7 @@ Date: Sat, 14 May 2022 09:43:01 GMT
 ----
 [source,json]
 ----
-{"success":true}
+{}
 ----
 
 === GET: Select Data
