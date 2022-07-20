@@ -8,6 +8,7 @@ import io.agrest.docs.framework.model.Book;
 import io.agrest.jaxrs3.AgJaxrs;
 import io.agrest.meta.AgEntity;
 import io.agrest.meta.AgEntityOverlay;
+import io.agrest.protocol.ControlParams;
 import io.agrest.protocol.Exp;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -58,9 +59,9 @@ public class GET_AuthorApi {
     // tag::get_include_sort[]
     @GET
     public DataResponse<Author> getIncludeAndSort(
-            @QueryParam("include") List<String> includes,  // <1>
-            @QueryParam("sort") String sort,
-            @QueryParam("direction") String direction) {
+            @QueryParam(ControlParams.INCLUDE) List<String> includes,  // <1>
+            @QueryParam(ControlParams.SORT) String sort,
+            @QueryParam(ControlParams.DIRECTION) String direction) {
 
         AgRequest request = AgJaxrs.request(config) // <2>
                 .addIncludes(includes)
@@ -76,8 +77,8 @@ public class GET_AuthorApi {
     // tag::get_server_side_rules[]
     @GET
     public DataResponse<Author> getModernAuthors(
-            @QueryParam("include") List<String> includes,
-            @QueryParam("exp") String urlExp) {
+            @QueryParam(ControlParams.INCLUDE) List<String> includes,
+            @QueryParam(ControlParams.EXP) String urlExp) {
 
         AgRequest request = AgJaxrs.request(config)
                 .addIncludes(includes)
