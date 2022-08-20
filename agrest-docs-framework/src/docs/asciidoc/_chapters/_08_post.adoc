@@ -29,10 +29,10 @@ include::../../../main/java/io/agrest/docs/framework/POST_AuthorApi.java[tag=pos
 Just like <<GET Requests,GET>>, such requests can take Agrest protocol parameters to shape, filter and order the response
 collection. "Read" object and property filters can also be applied to them, just like with GET.
 
-=== Update Data Flavors
+=== Representation of Create Data
 
 We've already seen how to pass object data to Agrest as a JSON String representing either a single object, or a
-collection of objects conforming to Agrest Protocol link:../protocol#update-request[Update Document] format. Alternatively,
+collection of objects per Agrest Protocol link:../protocol#update-request[Update Document] format. Alternatively,
 each JSON object can be represented as an `EntityUpdate<T>`. E.g.:
 
 [source,java,indent=0]
@@ -54,10 +54,10 @@ But `EntityUpdate` has other advantages:
 
 * It makes the expected payload of your REST method more explicit (e.g. for the purpose of generating OpenAPI documentation)
 * It allows to distinguish between endpoints that can process just a single object vs. those that process collections
-* It allows to tweak the payload of the client request in your server-side code
+* It allows to tweak the client request in your server-side code
 
-NOTE: These update data formats are used across all handlers that create or modify entities, and both POST and PUT
-requests.
+NOTE: String and EntityUpdate data formats are used in the same way across all handlers that create or modify entities,
+and both POST and PUT requests.
 
 === Customizing Entities for POST
 
