@@ -105,6 +105,9 @@ include::../../../main/java/io/agrest/docs/framework/GET_AuthorApi.java[tag=get_
 Internally property filter is implemented as an overlay, similar to the previous example, but from the user perspective
 the filter API is less verbose.
 
+NOTE: Don't forget that you can also define readability rules for individual properties globally using `@AgAttribute`
+annotation (see <<Schema Annotations>>)
+
 === Object Visibility
 
 The previous examples shows how you can hide certain _properties_ based on per-request custom logic. Similarly,

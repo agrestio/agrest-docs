@@ -67,3 +67,26 @@ properties) :
    { "id" : 8, "name": "Y" }
 ]
 ----
+
+NOTE: While collection response documents can contain object trees with an unlimited depth (entities with their related
+entities, with their own related entities and so on), update documents can only have properties of a single entity.
+It can still have references to the related entities as described below, but no entity nesting.
+
+==== Updating To-One Relationships
+
+To set a to-one relationship of an updated entity, use a pair "propertyName" : "related_id" in the update request document:
+
+[source,json]
+----
+{ "id" : 5, "related": 10 }
+----
+
+==== Updating To-Many Relationships
+
+To set a to-many relationship of an updated entity, pass a collection of ids for the relationship property in the
+update request document:
+
+[source,json]
+----
+{ "id" : 5, "related": [101, 2, 305] }
+----

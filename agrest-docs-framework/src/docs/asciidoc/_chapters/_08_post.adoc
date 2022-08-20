@@ -1,4 +1,66 @@
 == POST Requests
 
+Agrest works with REST resources that represent data entities. For such resources, `POST` requests are used to _create_
+new entities in a _non-idempotent way_. In practice, it means that created entity id is not known to the client upfront,
+and will be generated on the server. The simplest POST handler may look like this:
 
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/POST_AuthorApi.java[tag=post_create_and_forget]
+----
 
+<1> Author entity data is accepted as a String. The String must contain JSON and must conform to the Agrest Protocol
+link:../protocol#update-request[Update Document] format, i.e. be either a single object or a collection of objects.
+Object properties should match the properties of the created entity. Here is an example of a single object payload:
+`{"name":"Ernest Hemingway","dateOfBirth":"1899-07-21"}`
+<2> Start "create" operation builder
+<3> Call "sync" that will execute the "create" operation and return a "simple" response
+
+Such "create-and-forget" style of `POST` is rarely used, as the client usually needs to know the server-generated id
+of the created entity or entities. Instead, you could use a "selecting" flavor that returns back the created object(s),
+combining create and select in one call:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/POST_AuthorApi.java[tag=post_create_and_select]
+----
+<1> Instead of "sync", call "syncAndSelect"
+
+Just like <<GET Requests,GET>>, such requests can take Agrest protocol parameters to shape, filter and order the response
+collection. "Read" object and property filters can also be applied to them, just like with GET.
+
+=== Update Data Flavors
+
+We've already seen how to pass object data to Agrest as a JSON String representing either a single object, or a
+collection of objects conforming to Agrest Protocol link:../protocol#update-request[Update Document] format. Alternatively,
+each JSON object can be represented as an `EntityUpdate<T>`. E.g.:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/POST_AuthorApi.java[tag=post_create_entity_update]
+----
+<1> Instead of a String, pass `EntityUpdate<Author>`
+
+Similarly, a collection of updates can be passed:
+
+[source,java,indent=0]
+----
+include::../../../main/java/io/agrest/docs/framework/POST_AuthorApi.java[tag=post_create_entity_updates]
+----
+<1> Instead of a String, pass `List<EntityUpdate<Author>>`
+
+There's no functional difference between using Strings or EntityUpdates. In both cases Agrest performs the same operation.
+But `EntityUpdate` has other advantages:
+
+* It makes the expected payload of your REST method more explicit (e.g. for the purpose of generating OpenAPI documentation)
+* It allows to distinguish between endpoints that can process just a single object vs. those that process collections
+* It allows to tweak the payload of the client request in your server-side code
+
+NOTE: These update data formats are used across all handlers that create or modify entities, and both POST and PUT
+requests.
+
+=== Customizing Entities for POST
+
+=== Property Set Authorization
+
+=== Object Create Authorization
