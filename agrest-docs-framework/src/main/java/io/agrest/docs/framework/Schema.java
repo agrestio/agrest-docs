@@ -62,7 +62,7 @@ public class Schema {
         // tag::overlay[]
         AgEntityOverlay<Author> overlay = AgEntity
                 .overlay(Author.class)
-                .redefineAttribute( // <1>
+                .attribute( // <1>
                         "age",
                         Integer.TYPE,
                         a -> Period.between(a.getDateOfBirth(), LocalDate.now()).getYears())
