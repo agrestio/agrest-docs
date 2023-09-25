@@ -4,14 +4,75 @@ Expressions passed via `exp` control parameter or inside the JSON `include` are 
 the root request entity (in the former case), or a nested entity (in the latter case). We've already discussed
 the URL parameter structure for `exp` (e.g. how to pass parameters). Here we will focus on the syntax of the expression itself.
 
-=== Path Expressions
+=== Literals
 
-An important building block of expressions is a property path. It is a dot-separated String of property names
-implicitly rooted in some entity:
+There are a few kinds of literals that denote various constant scalar values in expressions - numbers, strings, dates, etc.
+
+Null is a literal that indicates an absent value. Can be either lower or upper case:
+[source]
+----
+null
+NULL
+----
+
+Boolean literals can be either true or false. Also both lower or upper case are valid:
+[source]
+----
+true
+TRUE
+false
+FALSE
+----
+
+A variety of number literals are supported - positive / negative, whole / decimal, etc.:
+[source]
+----
+// positive int
+1
+
+// negative int
+-2
+
+// long
+3147483647L
+
+// double
+2.1
+
+// big decimal
+2.1001234065B
+
+// TODO: hex types, etc.
+----
+
+String literals contain arbitrary sequences of characters, and are enclosed in either single or double quotes:
 
 [source]
 ----
-// Entity id. Most Agrest entities have the property called "id"
+'abc'
+"abc"
+
+// if quotes are present in strings, either use non-conflicting quote symbols, or escape them
+'a"c'
+"a'c"
+"a\"c"
+----
+
+Date / time components should follow ISO 8601 format, though syntactically they just quoted strings:
+[source]
+----
+"2023-09-11"
+"2023-09-11T00:00:01"
+----
+
+=== Paths
+
+Important building blocks of expressions are property paths. They are dot-separated unquoted strings that point to
+property names of some entity:
+
+[source]
+----
+// Entity id. Most Agrest entities have it
 id
 
 // Entity attribute name (a "simple" or "value" property)
@@ -29,65 +90,23 @@ books.library.name
 books+.library.name
 ----
 
-=== Scalars
+=== Parameters
 
-Another type of expression components is "scalars" or value "literals". There are three types of scalars - booleans,
-numbers and strings. Booleans are just true or false, in upper or lower case:
-[source]
-----
-true
-TRUE
-false
-FALSE
-----
+Parameters represent placeholders in expressions that are replaced with scalar values when the expression is
+evaluated on the server. Parameters are unquoted strings that start with a dollar sign:
 
-A variety of number formats are supported - positive / negative, whole / decimal:
-[source]
-----
-// positive int
-1
+```
+// must start with a dollar sign,
+// followed by a sequence of letters, digits or underscores
+$myVar
+$1
+$_myVar
+```
 
-// negative int
--2
-
-// long
-3147483647L
-
-// double
-2.1
-
-// big decimal
-2.1001234065B
-----
-
-Strings are included in single or double quotes:
-
-NOTE: Unquoted strings are generally treated as property paths
-
-[source]
-----
-'abc'
-"abc"
-
-// if quotes are present in strings, either use non-conflicting quote symbols,
-// or escape the quotes
-'a"c'
-"a'c"
-"a\"c"
-----
-
-Agrest backend framework would also recognize Strings representing date / time components in ISO 8601 format,
-and can convert them to the proper types based on the expression context. From the expressions perspective
-those are just Strings:
-[source]
-----
-"2023-09-11"
-"2023-09-11T00:00:01"
-----
-
-=== Named Parameters
-
-TODO ...
+As described in the previous chapter, parameters can be resolved either by name (the name is the part of the string
+that follows the dollar sign), or by position in the expression. Parameter naming syntax for both styles is the
+same (e.g. there's no special significance to using a number as the param name, like `$15`. It is simply a parameter
+called "15").
 
 === Arithmetic Expressions
 [source]
