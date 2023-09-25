@@ -76,8 +76,8 @@ NOTE: Unquoted strings are generally treated as property paths
 "a\"c"
 ----
 
-Agrest backend framework would also recognize Strings representing date / time components in ISO8601 format,
-and can convert them to the corresponding classes based on the expression context. From the expressions perspective
+Agrest backend framework would also recognize Strings representing date / time components in ISO 8601 format,
+and can convert them to the proper types based on the expression context. From the expressions perspective
 those are just Strings:
 [source]
 ----

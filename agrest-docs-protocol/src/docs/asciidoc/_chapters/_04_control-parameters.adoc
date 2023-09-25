@@ -31,7 +31,7 @@ element, and all subsequent elements are positional parameters
 `exp_string` is a conditional expression based on Agrest expression syntax, that should be intuitively understood
 by most programmers.
 
-NOTE: The full syntax of `exp_string` is described in the <<Expression Syntax>> chapter, but
+NOTE: The full syntax of `exp_string` is described in the <<Expression Syntax>> chapter
 
 Below are some examples:
 
