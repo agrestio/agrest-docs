@@ -91,6 +91,9 @@ books.library.name
 books+.library.name
 ----
 
+NOTE: Paths are used not only in expressions, but also in a variety of other control parameters (`sort`, `include`,
+`exclude`, `mapBy`)
+
 === Parameters
 
 Parameters are placeholders in expressions that are replaced with scalar values when the expression is
