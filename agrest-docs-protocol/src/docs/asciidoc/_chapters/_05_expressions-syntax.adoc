@@ -1,6 +1,6 @@
 == Expression Syntax
 
-Expressions passed via `exp` control parameter or inside the JSON `include` are conditions evaluated in the context of
+Expressions passed via an `exp` control parameter or inside a JSON `include` are conditions evaluated in the context of
 the root request entity (in the former case), or a nested entity (in the latter case). We've already discussed
 the URL parameter structure for `exp` (e.g. how to pass parameters). Here we will focus on the syntax of the expression itself.
 
