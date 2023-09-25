@@ -1,8 +1,8 @@
-== Exp syntax
+== Expression Syntax
 
 Expressions passed via `exp` control parameter or inside the JSON `include` are conditions evaluated in the context of
-the root request entity (in the former case), or a specific nested entity (in the latter case). We've already discussed
-the URL syntax and how to bind parameters to expressions. Here we will focus on the syntax of the expression String.
+the root request entity (in the former case), or a nested entity (in the latter case). We've already discussed
+the URL parameter structure for `exp` (e.g. how to pass parameters). Here we will focus on the syntax of the expression itself.
 
 === Path Expressions
 
@@ -23,14 +23,16 @@ books
 // Dot-separated paths that span multiple entities
 books.id
 books.library.name
+
+// Adding "+" to a relationship would indicate "left join" semantics
+// for the backend resolving the path
+books+.library.name
 ----
 
 === Scalars
 
-Scalars (or simple value constants) can be used in expressions. There are three types of scalar literals - booleans,
-numbers and strings.
-
-Booleans are just true or false, either in upper or lower case:
+Another type of expression components is "scalars" or value "literals". There are three types of scalars - booleans,
+numbers and strings. Booleans are just true or false, in upper or lower case:
 [source]
 ----
 true
@@ -39,7 +41,7 @@ false
 FALSE
 ----
 
-A variety of numbers are supported - positive / negative, whole / decimal:
+A variety of number formats are supported - positive / negative, whole / decimal:
 [source]
 ----
 // positive int
@@ -60,7 +62,8 @@ A variety of numbers are supported - positive / negative, whole / decimal:
 
 Strings are included in single or double quotes:
 
-NOTE: unquoted strings are treated as property paths.
+NOTE: Unquoted strings are generally treated as property paths
+
 [source]
 ----
 'abc'
@@ -78,8 +81,8 @@ and can convert them to the corresponding classes based on the expression contex
 those are just Strings:
 [source]
 ----
-2023-09-11
-2023-09-11T00:00:01
+"2023-09-11"
+"2023-09-11T00:00:01"
 ----
 
 === Named Parameters
@@ -100,9 +103,8 @@ b.c / d
 TODO ...
 
 === Functions
-Functions produce scalar values from some expressions passed to them. Depending on their nature, functions can take
-zero or more arguments. Paths, scalars, arithmetic and bitwise expressions can be function arguments were appropriate.
-Supported functions:
+Agrest supports a number of scalar functions. Functions can take zero or more arguments. Paths, scalars, arithmetic
+and bitwise expressions can be function arguments were appropriate. Supported functions:
 [source]
 ----
 // date/time
