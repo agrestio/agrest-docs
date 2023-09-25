@@ -105,12 +105,10 @@ zero or more arguments. Paths, scalars, arithmetic and bitwise expressions can b
 Supported functions:
 [source]
 ----
-// current date/time
+// date/time
 currentDate()
 currentTime()
 currentTimestamp()
-
-// date/time parts extraction
 day(exp)
 dayOfMonth(exp)
 dayOfWeek(exp)
