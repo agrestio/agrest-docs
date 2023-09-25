@@ -82,7 +82,7 @@ public class GET_AuthorApi {
 
         AgRequest request = AgJaxrs.request(config)
                 .addIncludes(includes)
-                .andExp(Exp.keyValue("dateOfBirth", ">=", LocalDate.of(1970, 1, 1))) // <1>
+                .andExp(Exp.greaterOrEqual("dateOfBirth", LocalDate.of(1970, 1, 1))) // <1>
                 .andExp(urlExp) // <2>
                 .addSort("name", "asc") // <3>
                 .build();
