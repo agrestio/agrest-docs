@@ -52,13 +52,14 @@ String literals contain arbitrary sequences of characters, and are enclosed in e
 'abc'
 "abc"
 
-// if quotes are present in strings, either use non-conflicting quote symbols, or escape them
+// if quotes are present in strings, either use non-conflicting quote symbols,
+// or escape them explicitly
 'a"c'
 "a'c"
 "a\"c"
 ----
 
-Date / time components should follow ISO 8601 format, though syntactically they just quoted strings:
+Date / time components are regular quoted strings that follow ISO 8601 format:
 [source]
 ----
 "2023-09-11"
@@ -92,7 +93,7 @@ books+.library.name
 
 === Parameters
 
-Parameters represent placeholders in expressions that are replaced with scalar values when the expression is
+Parameters are placeholders in expressions that are replaced with scalar values when the expression is
 evaluated on the server. Parameters are unquoted strings that start with a dollar sign:
 
 ```
