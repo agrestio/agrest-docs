@@ -1,0 +1,146 @@
+== Exp syntax
+
+Expressions passed via `exp` control parameter or inside the JSON `include` are conditions evaluated in the context of
+the root request entity (in the former case), or a specific nested entity (in the latter case). We've already discussed
+the URL syntax and how to bind parameters to expressions. Here we will focus on the syntax of the expression String.
+
+=== Path Expressions
+
+An important building block of expressions is a property path. It is a dot-separated String of property names
+implicitly rooted in some entity:
+
+[source]
+----
+// Entity id. Most Agrest entities have the property called "id"
+id
+
+// Entity attribute name (a "simple" or "value" property)
+dateOfBirth
+
+// Entity relationship name
+books
+
+// Dot-separated paths that span multiple entities
+books.id
+books.library.name
+----
+
+=== Scalars
+
+Scalars (or simple value constants) can be used in expressions. There are three types of scalar literals - booleans,
+numbers and strings.
+
+Booleans are just true or false, either in upper or lower case:
+[source]
+----
+true
+TRUE
+false
+FALSE
+----
+
+A variety of numbers are supported - positive / negative, whole / decimal:
+[source]
+----
+// positive int
+1
+
+// negative int
+-2
+
+// long
+3147483647L
+
+// double
+2.1
+
+// big decimal
+2.1001234065B
+----
+
+Strings are included in single or double quotes:
+
+NOTE: unquoted strings are treated as property paths.
+[source]
+----
+'abc'
+"abc"
+
+// if quotes are present in strings, either use non-conflicting quote symbols,
+// or escape the quotes
+'a"c'
+"a'c"
+"a\"c"
+----
+
+Agrest backend framework would also recognize Strings representing date / time components in ISO8601 format,
+and can convert them to the corresponding classes based on the expression context. From the expressions perspective
+those are just Strings:
+[source]
+----
+2023-09-11
+2023-09-11T00:00:01
+----
+
+=== Named Parameters
+
+TODO ...
+
+=== Arithmetic Expressions
+[source]
+----
+a + 5
+1 - a
+a * b
+b.c / d
+----
+
+=== Bitwise Expressions
+
+TODO ...
+
+=== Functions
+Functions produce scalar values from some expressions passed to them. Depending on their nature, functions can take
+zero or more arguments. Paths, scalars, arithmetic and bitwise expressions can be function arguments were appropriate.
+Supported functions:
+[source]
+----
+// current date/time
+currentDate()
+currentTime()
+currentTimestamp()
+
+// date/time parts extraction
+day(exp)
+dayOfMonth(exp)
+dayOfWeek(exp)
+dayOfYear(exp)
+hour(exp)
+minute(exp)
+month(exp)
+second(exp)
+week(exp)
+year(exp)
+
+// numeric
+abs(exp)
+mod(exp1, exp2)
+sqrt(exp)
+
+// string
+concat(exp1, exp2)
+length(exp)
+locate(toLocateExp, inStringExp [, startAtIndexExp])
+lower(exp)
+substring(strExp, startIndexExp [, lenExp])
+trim(exp)
+upper(exp)
+----
+
+=== Simple Conditions
+
+TODO ...
+
+=== Chained Conditions
+
+TODO ...

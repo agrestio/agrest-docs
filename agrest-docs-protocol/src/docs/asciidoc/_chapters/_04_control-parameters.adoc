@@ -28,8 +28,8 @@ exp={"exp"="<exp_string>", "params":{ "param1" : "value1", "param2", "value2"}} 
 element, and all subsequent elements are positional parameters
 <3> An expression with parameter resolution _by name_ is represented as a JSON object with "exp" and "params" properties
 
-`exp_string` is a conditional expression based on Agrest own "expression DSL", that should be intuitively understood
-by most programmers. Here are some examples:
+`exp_string` is a conditional expression based on Agrest expression syntax, that should be intuitively understood
+by most programmers. The full expression syntax is described in the next chapter, but here are some examples:
 
 [source]
 ----
@@ -38,10 +38,6 @@ books.title = 'A Farewell to Arms'
 title = not in ('A Farewell to Arms', 'For Whom the Bell Tolls')
 title like 'A%' and author.dateOfBirth > $afterDate
 ----
-
-_TODO: A more comprehensive Agrest exp format specification is forthcoming. Until then, please check
-https://cayenne.apache.org/docs/4.2/cayenne-guide/expressions.html[Apache Cayenne expressions] that use practically
-the same syntax (except Agrest would not allow "db:" expressions). And see the examples below_
 
 A few things to note about the examples above:
 
