@@ -85,7 +85,7 @@ books
 books.id
 books.library.name
 
-// Adding "+" to a relationship would indicate "left join" semantics
+// Adding "+" to a relationship indicates "left join" semantics
 // for the backend resolving the path
 books+.library.name
 ----
