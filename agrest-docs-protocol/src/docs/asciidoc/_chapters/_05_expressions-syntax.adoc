@@ -2,26 +2,28 @@
 
 Expressions passed via an `exp` control parameter or inside a JSON `include` are conditions evaluated in the context of
 the root request entity (in the former case), or a nested entity (in the latter case). We've already discussed
-the URL parameter structure for `exp` (e.g. how to pass parameters). Here we will focus on the syntax of the expression itself.
+the URL parameter structure for `exp` (e.g. how to pass parameters). Here we will focus on the syntax of the expression
+itself.
+
+NOTE: The expression syntax presented here is a part of the Agrest protocol. Some Agrest backends may not be able to
+support every single expression described here, but most should work with a reasonable subset. And the default Java
+server shipped with Agrest (that works on top of relational databases) supports the syntax in its entirety.
 
 === Literals
 
 There are a few kinds of literals that denote various constant scalar values in expressions - numbers, strings, dates, etc.
 
-Null is a literal that indicates an absent value. Can be either lower or upper case:
+Null is a literal that indicates an absent value:
 [source]
 ----
 null
-NULL
 ----
 
-Boolean literals can be either true or false. Also both lower or upper case are valid:
+Boolean literals are either true or false:
 [source]
 ----
 true
-TRUE
 false
-FALSE
 ----
 
 A variety of number literals are supported - positive / negative, whole / decimal, etc.:
@@ -86,8 +88,9 @@ books
 books.id
 books.library.name
 
-// Adding "+" to a relationship indicates "left join" semantics
-// for the backend resolving the path
+// Adding "+" to a relationship name anywhere in the path indicates "optional" semantics.
+// This is a hint to the server evaluating the expression. E.g. if the expression is
+// translated to SQL, LEFT JOIN will be used for optional expressions
 books+.library.name
 ----
 
@@ -126,8 +129,8 @@ b.c / d
 TODO ...
 
 === Functions
-Agrest supports a number of scalar functions. Functions can take zero or more arguments. Paths, scalars, arithmetic
-and bitwise expressions can be function arguments were appropriate. Supported functions:
+Agrest supports a number of scalar functions. Function names are case-sensitive. Functions can take zero or more
+arguments that can be paths, scalars, arithmetic and bitwise expressions. Supported functions:
 [source]
 ----
 // date/time
@@ -161,8 +164,44 @@ upper(exp)
 ----
 
 === Simple Conditions
+"Simple" conditional expressions are built from paths and literals and a variety of comparison operators:
 
-TODO ...
+[source]
+----
+name = 'Joe'
+name != 'Alice'
+name <> 'Alice'
+
+salary < 50000
+salary <= 50000
+age > 16
+age >= 21
+
+salary between 50000 and 150000
+salary not between 50000 and 150000
+
+color in ('blue', 'red', 'green')
+color not in ('blue', 'red', 'green')
+----
+
+A special kind of comparison is SQL-style pattern matching with "like" operatior: `a like '<pattern>'`. In the pattern
+string, a few characters have special meanings as "wildcards": `%` stands for any sequence of characters, while `_`
+stands for any single character. If you want `%` or `_` to be treated as a regular character, not a wildcard, you
+should prefix it with an arbitrary escape character, as shown in the examples below.
+
+[source]
+----
+name like 'A%'
+name like 'A_C_'
+name like 'Ax_C_' escape 'x'
+
+// case-insensitive matching
+name likeIgnoreCase 'a%'
+
+// not like
+name not like 'A%'
+name not likeIgnoreCase 'A%'
+----
 
 === Chained Conditions
 
