@@ -184,15 +184,17 @@ color in ('blue', 'red', 'green')
 color not in ('blue', 'red', 'green')
 ----
 
-A special kind of comparison is SQL-style pattern matching with "like" operatior: `a like '<pattern>'`. In the pattern
-string, a few characters have special meanings as "wildcards": `%` stands for any sequence of characters, while `_`
-stands for any single character. If you want `%` or `_` to be treated as a regular character, not a wildcard, you
+A special kind of comparison is SQL-style pattern matching with "like" operator: `a like '<pattern>'`. In the pattern
+string, a few characters have special meanings as "wildcards": "%" stands for any sequence of characters, while "\_"
+stands for any single character. If you want "%" or "_" to be treated as a regular character, not a wildcard, you
 should prefix it with an arbitrary escape character, as shown in the examples below.
 
 [source]
 ----
 name like 'A%'
 name like 'A_C_'
+
+// do not treat the first underscore as a wildcard
 name like 'Ax_C_' escape 'x'
 
 // case-insensitive matching
