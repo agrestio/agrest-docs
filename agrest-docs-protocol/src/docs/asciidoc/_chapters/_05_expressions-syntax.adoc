@@ -212,6 +212,20 @@ name not like 'A%'
 name not likeIgnoreCase 'A%'
 ----
 
-=== Chained Conditions
+=== Composite Conditions
 
-TODO ...
+Conditions can be joined together using `and`, `or` or negated with `not`.
+
+[source]
+----
+name like 'A%' and salary < 100000
+name = 'Joe' or name = 'Ann'
+not name like 'A%' // same as "name not like 'A%'"
+----
+
+Operator precedence (in decreasing order) goes like : `not`, `and`, `or`. Parenthesis can be used to specify an
+explicit order of execution that is different from the default:
+[source]
+----
+(salary < 100000 or age > 40) and name like 'A%'
+----
