@@ -1,13 +1,13 @@
 == Expression Syntax
 
 Expressions passed via an `exp` control parameter or inside a JSON `include` are conditions evaluated in the context of
-the root request entity (in the former case), or a nested entity (in the latter case). We've already discussed
+the root request entity (in the former case), or a nested entity (in the latter case). We've already shown
 the URL parameter structure for `exp` (e.g. how to pass parameters). Here we will focus on the syntax of the expression
 itself.
 
-NOTE: The expression syntax presented here is a part of the Agrest protocol. Some Agrest backends may not be able to
-support every single expression described here, but most should work with a reasonable subset. And the default Java
-server shipped with Agrest (that works on top of relational databases) supports the syntax in its entirety.
+NOTE: The syntax presented here is a part of the Agrest protocol. Though some Agrest backends may not be able to
+support every single expression described here, but most should work with a reasonable subset. The Java server framework
+shipped by the Agrest project supports the syntax in its entirety.
 
 === Literals
 
@@ -41,7 +41,7 @@ A variety of number literals are supported - positive / negative, whole / decima
 // double
 2.1
 
-// big decimal
+// big decimal (arbitrary size and precision)
 2.1001234065B
 
 // TODO: hex types, etc.
@@ -54,14 +54,14 @@ String literals contain arbitrary sequences of characters, and are enclosed in e
 'abc'
 "abc"
 
-// if quotes are present in strings, either use non-conflicting quote symbols,
+// if quotes are present in a string, either use non-conflicting quote symbols,
 // or escape them explicitly
 'a"c'
 "a'c"
 "a\"c"
 ----
 
-Date / time components are regular quoted strings that follow ISO 8601 format:
+Date / time components are just strings that follow ISO 8601 format:
 [source]
 ----
 "2023-09-11"
@@ -87,15 +87,22 @@ books
 // Dot-separated path spanning multiple entities
 books.id
 books.library.name
-
-// Adding "+" to a relationship name anywhere in the path indicates "optional" semantics.
-// This is a hint to the server evaluating the expression. E.g. if the expression is
-// translated to SQL, LEFT JOIN will be used for optional expressions
-books+.library.name
 ----
 
 NOTE: Paths are used not only in expressions, but also in a variety of other control parameters (`sort`, `include`,
 `exclude`, `mapBy`)
+
+There are a few advanced features that allow to specify special behavior of the relationship path components:
+
+[source]
+----
+// "Optional" semantics
+
+// Adding "+" to a relationship anywhere in the path indicates optional" semantics.
+// This is a hint to the server evaluating the expression. E.g. if the expression is
+// translated to SQL, LEFT JOIN will be used for optional expressions
+books+.library.name
+----
 
 === Parameters
 
